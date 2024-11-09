@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/portfolio/obj-detection-react/static/css/main.c939e2f6.css",
-    "main.js": "/portfolio/obj-detection-react/static/js/main.cd698631.js",
+    "main.css": "/portfolio/obj-detection-react/static/css/main.481665f6.css",
+    "main.js": "/portfolio/obj-detection-react/static/js/main.90d3d668.js",
     "static/js/453.6ad76df2.chunk.js": "/portfolio/obj-detection-react/static/js/453.6ad76df2.chunk.js",
     "index.html": "/portfolio/obj-detection-react/index.html",
-    "main.c939e2f6.css.map": "/portfolio/obj-detection-react/static/css/main.c939e2f6.css.map",
-    "main.cd698631.js.map": "/portfolio/obj-detection-react/static/js/main.cd698631.js.map",
+    "main.481665f6.css.map": "/portfolio/obj-detection-react/static/css/main.481665f6.css.map",
+    "main.90d3d668.js.map": "/portfolio/obj-detection-react/static/js/main.90d3d668.js.map",
     "453.6ad76df2.chunk.js.map": "/portfolio/obj-detection-react/static/js/453.6ad76df2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c939e2f6.css",
-    "static/js/main.cd698631.js"
+    "static/css/main.481665f6.css",
+    "static/js/main.90d3d668.js"
   ]
 }
