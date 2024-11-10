@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/portfolio/obj-detection-react/static/css/main.481665f6.css",
-    "main.js": "/portfolio/obj-detection-react/static/js/main.90d3d668.js",
+    "main.js": "/portfolio/obj-detection-react/static/js/main.f1d2cae9.js",
     "static/js/453.6ad76df2.chunk.js": "/portfolio/obj-detection-react/static/js/453.6ad76df2.chunk.js",
     "index.html": "/portfolio/obj-detection-react/index.html",
     "main.481665f6.css.map": "/portfolio/obj-detection-react/static/css/main.481665f6.css.map",
-    "main.90d3d668.js.map": "/portfolio/obj-detection-react/static/js/main.90d3d668.js.map",
+    "main.f1d2cae9.js.map": "/portfolio/obj-detection-react/static/js/main.f1d2cae9.js.map",
     "453.6ad76df2.chunk.js.map": "/portfolio/obj-detection-react/static/js/453.6ad76df2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.481665f6.css",
-    "static/js/main.90d3d668.js"
+    "static/js/main.f1d2cae9.js"
   ]
 }
