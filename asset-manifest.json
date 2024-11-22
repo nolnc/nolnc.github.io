@@ -1,15 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.7b9742e0.css",
-    "main.js": "/static/js/main.925a9301.js",
-    "static/js/453.6ad76df2.chunk.js": "/static/js/453.6ad76df2.chunk.js",
+    "main.css": "/static/css/main.f6f8ed79.css",
+    "main.js": "/static/js/main.cd3b7587.js",
+    "static/js/453.1eb5cc81.chunk.js": "/static/js/453.1eb5cc81.chunk.js",
+    "static/media/poke_boys2.png": "/static/media/poke_boys2.4a81faac25260972f9fb.png",
+    "static/media/Gochu.png": "/static/media/Gochu.3b268ef439ffae7706b7.png",
+    "static/media/Tobey_cannon.jpg": "/static/media/Tobey_cannon.75f7c6722c53ad1ba0c5.jpg",
+    "static/media/eggy_dragonball_fighter.png": "/static/media/eggy_dragonball_fighter.486bbe06c0d484f64106.png",
+    "static/media/pika_cutie2.png": "/static/media/pika_cutie2.833affff79021d4032c2.png",
+    "static/media/poke_pong.png": "/static/media/poke_pong.b273d2c484c4e9460931.png",
+    "static/media/flowing_circuit_board.webp": "/static/media/flowing_circuit_board.bac889069a9acf608777.webp",
+    "static/media/background_prairie.jpg": "/static/media/background_prairie.65074eb33f3d1b6b9e64.jpg",
+    "static/media/project_tile.png": "/static/media/project_tile.0531e2838e1b9dcdabac.png",
+    "static/media/pokechoice.jpg": "/static/media/pokechoice.0ff08514065ddc43f2e9.jpg",
+    "static/media/powerful-electric-pikachu.webp": "/static/media/powerful-electric-pikachu.76a0eab60a60bb4fee7d.webp",
+    "static/media/goku_family.jpg": "/static/media/goku_family.36ce444f9ed8eb9c721e.jpg",
+    "static/media/pikachu_mail3.png": "/static/media/pikachu_mail3.92067d8339ccc7d00635.png",
     "index.html": "/index.html",
-    "main.7b9742e0.css.map": "/static/css/main.7b9742e0.css.map",
-    "main.925a9301.js.map": "/static/js/main.925a9301.js.map",
-    "453.6ad76df2.chunk.js.map": "/static/js/453.6ad76df2.chunk.js.map"
+    "main.f6f8ed79.css.map": "/static/css/main.f6f8ed79.css.map",
+    "main.cd3b7587.js.map": "/static/js/main.cd3b7587.js.map",
+    "453.1eb5cc81.chunk.js.map": "/static/js/453.1eb5cc81.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7b9742e0.css",
-    "static/js/main.925a9301.js"
+    "static/css/main.f6f8ed79.css",
+    "static/js/main.cd3b7587.js"
   ]
 }

@@ -1,10 +1,11 @@
 {
-  "short_name": "obj-detection-react",
-  "name": "Real-time object detection",
+  "short_name": "NC Lab",
+  "name": "NC Lab",
   "icons": [
     {
-      "src": "favicon.svg",
-      "type": "image/svg+xml"
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
     }
   ],
   "start_url": ".",
