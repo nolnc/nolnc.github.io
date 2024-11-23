@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.f6f8ed79.css",
-    "main.js": "/static/js/main.cd3b7587.js",
+    "main.css": "/static/css/main.7f7d8b2c.css",
+    "main.js": "/static/js/main.a2f0a593.js",
     "static/js/453.1eb5cc81.chunk.js": "/static/js/453.1eb5cc81.chunk.js",
     "static/media/poke_boys2.png": "/static/media/poke_boys2.4a81faac25260972f9fb.png",
     "static/media/Gochu.png": "/static/media/Gochu.3b268ef439ffae7706b7.png",
@@ -17,12 +17,12 @@
     "static/media/goku_family.jpg": "/static/media/goku_family.36ce444f9ed8eb9c721e.jpg",
     "static/media/pikachu_mail3.png": "/static/media/pikachu_mail3.92067d8339ccc7d00635.png",
     "index.html": "/index.html",
-    "main.f6f8ed79.css.map": "/static/css/main.f6f8ed79.css.map",
-    "main.cd3b7587.js.map": "/static/js/main.cd3b7587.js.map",
+    "main.7f7d8b2c.css.map": "/static/css/main.7f7d8b2c.css.map",
+    "main.a2f0a593.js.map": "/static/js/main.a2f0a593.js.map",
     "453.1eb5cc81.chunk.js.map": "/static/js/453.1eb5cc81.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f6f8ed79.css",
-    "static/js/main.cd3b7587.js"
+    "static/css/main.7f7d8b2c.css",
+    "static/js/main.a2f0a593.js"
   ]
 }
