@@ -1,12 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.3c501cc5.css",
-    "main.js": "/static/js/main.bf9c3f10.js",
+    "main.css": "/static/css/main.b6278dcc.css",
+    "main.js": "/static/js/main.7995cc22.js",
     "static/js/453.1eb5cc81.chunk.js": "/static/js/453.1eb5cc81.chunk.js",
     "static/media/snake.png": "/static/media/snake.6673ea610ac381cf7aa0.png",
     "static/media/project_tile.png": "/static/media/project_tile.07c243d68999a641dc5e.png",
     "static/media/cat.png": "/static/media/cat.ee6558e981148e74715f.png",
+    "static/media/turkey.jfif": "/static/media/turkey.60c35d2d39920aad229b.jfif",
     "static/media/flowing_circuit_board.webp": "/static/media/flowing_circuit_board.bac889069a9acf608777.webp",
+    "static/media/sheep.jfif": "/static/media/sheep.cb4127c8960571478a55.jfif",
     "static/media/lion.jfif": "/static/media/lion.bc7317d276bd3b120df8.jfif",
     "static/media/frog.jfif": "/static/media/frog.d1fcdd7fe84ff3c06dd4.jfif",
     "static/media/cow.jfif": "/static/media/cow.2191e8ce62ced606ab56.jfif",
@@ -26,12 +28,12 @@
     "static/media/cricket.jfif": "/static/media/cricket.5c96e5adccf50235e0b1.jfif",
     "static/media/goose.jfif": "/static/media/goose.8f11d3015175a7bb9bb9.jfif",
     "index.html": "/index.html",
-    "main.3c501cc5.css.map": "/static/css/main.3c501cc5.css.map",
-    "main.bf9c3f10.js.map": "/static/js/main.bf9c3f10.js.map",
+    "main.b6278dcc.css.map": "/static/css/main.b6278dcc.css.map",
+    "main.7995cc22.js.map": "/static/js/main.7995cc22.js.map",
     "453.1eb5cc81.chunk.js.map": "/static/js/453.1eb5cc81.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3c501cc5.css",
-    "static/js/main.bf9c3f10.js"
+    "static/css/main.b6278dcc.css",
+    "static/js/main.7995cc22.js"
   ]
 }
