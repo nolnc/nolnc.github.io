@@ -1,0 +1,16 @@
+<svg viewBox="0 0 300 400" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M15 0 H285 L300 15 V385 L285 400 H15 L0 385 V15 L15 0Z" 
+        fill="rgba(11, 20, 38, 0.8)" 
+        stroke="#00f2ff" 
+        stroke-width="1.5" 
+        stroke-opacity="0.6" 
+        vector-effect="non-scaling-stroke" />
+  
+  <!-- Corner Brackets -->
+  <path d="M0 40 V15 L15 0 H40" stroke="#00f2ff" stroke-width="2" vector-effect="non-scaling-stroke" />
+  <path d="M260 400 H285 L300 385 V360" stroke="#bc13fe" stroke-width="2" vector-effect="non-scaling-stroke" />
+  
+  <!-- Side Detail -->
+  <rect x="0" y="150" width="2" height="100" fill="#00f2ff" opacity="0.4" />
+  <rect x="298" y="150" width="2" height="100" fill="#bc13fe" opacity="0.4" />
+</svg>

@@ -1,0 +1,22 @@
+<svg viewBox="0 0 600 60" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="text-glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Header Shape -->
+  <path d="M0 10 L20 0 H580 L600 10 V50 L580 60 H20 L0 50 V10Z" fill="rgba(15, 23, 42, 0.9)" stroke="#00f2ff" stroke-width="1.5" vector-effect="non-scaling-stroke" />
+  
+  <!-- Corner Accents -->
+  <path d="M0 25 V10 L15 2" stroke="#00f2ff" stroke-width="3" vector-effect="non-scaling-stroke" />
+  <path d="M600 35 V50 L585 58" stroke="#00f2ff" stroke-width="3" vector-effect="non-scaling-stroke" />
+  
+
+  <!-- Decorative Lines -->
+  <line x1="500" y1="15" x2="550" y2="15" stroke="#00f2ff" stroke-width="1" stroke-dasharray="4 2" />
+</svg>
