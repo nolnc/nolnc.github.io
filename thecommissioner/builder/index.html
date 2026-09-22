@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Standardized CDU Schematic CAD Builder & Component Library</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <!-- Custom Builder Stylesheet (No !important used) -->
+  <link rel="stylesheet" href="./css/builder_styles.css">
+</head>
+<body class="bg-[var(--background,#0f172a)] text-[var(--foreground,#f8fafc)] font-sans antialiased p-6 min-h-screen">
+
+  <!-- Header Banner -->
+  <header class="mb-6 border-b border-[var(--border,#334155)] pb-4 flex flex-wrap justify-between items-center gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-[var(--foreground,#f8fafc)] tracking-tight flex items-center gap-3">
+        <svg class="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 2 002-2V6a2 2 2 002-2H5a2 2 002 2v3a2 2 002 2m14 0v5a2 2 001-2 2H5a2 2 001-2-2v-5m14 0h-2M5 11H3" />
+        </svg>
+        CDU Schematic CAD Builder & Component Library
+      </h1>
+      <p class="text-sm text-[var(--muted-foreground,#94a3b8)] mt-0.5">
+        Drag & drop symbols, placeable pipe loops, auto-snapping port connections, and scaling controls!
+      </p>
+    </div>
+    <div>
+      <a href="../index.html" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-blue-500/40 text-blue-400 hover:text-white hover:bg-blue-600/20 text-xs font-semibold tracking-wide transition shadow-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        RETURN TO HUD DASHBOARD
+      </a>
+    </div>
+  </header>
+
+  <!-- 1. TOP SECTION: INTERACTIVE SCHEMATIC ASSEMBLY SANDBOX -->
+  <section id="sandbox" class="bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-2xl p-6 shadow-xl mb-10">
+    <!-- Section Header (Title & Subtitle) -->
+    <div class="mb-4 pb-3 border-b border-[var(--border,#334155)] flex flex-wrap justify-between items-center gap-3">
+      <div>
+        <h2 class="text-lg font-bold flex items-center gap-2 text-blue-400">
+          🛠️ Interactive CDU Schematic Assembly CAD Canvas
+        </h2>
+        <p class="text-xs text-[var(--muted-foreground,#94a3b8)] mt-0.5">
+          Place components & pipe loops. Drag pipe endpoints near green component ports to <strong>auto-snap & connect</strong>!
+        </p>
+      </div>
+    </div>
+
+    <!-- Component & Pipe Palette Toolbar -->
+    <div class="mb-4 p-3 bg-[var(--background,#0f172a)] rounded-xl border border-[var(--border,#334155)] flex flex-wrap items-center justify-between gap-3">
+      <!-- Add Component Group -->
+      <div class="flex flex-wrap gap-2 items-center">
+        <span class="text-xs font-semibold text-slate-400 mr-1 flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          Add Component:
+        </span>
+        
+        <!-- Pump -->
+        <button onclick="addSandboxItem('pump')" class="palette-btn" aria-label="Centrifugal Fluid Pump">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="14" fill="#0f172a" stroke="#3b82f6" stroke-width="2.5" />
+            <polygon points="14,12 14,28 28,20" fill="#3b82f6" class="spin-on-hover" />
+          </svg>
+          <span class="palette-tooltip">Centrifugal Pump (PUMP)</span>
+        </button>
+
+        <!-- Heat Exchanger -->
+        <button onclick="addSandboxItem('phe')" class="palette-btn" aria-label="Plate Heat Exchanger">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <rect x="7" y="5" width="26" height="30" rx="3" fill="#0f172a" stroke="#f59e0b" stroke-width="2" />
+            <path d="M 11 11 L 20 17 L 29 11 M 11 20 L 20 26 L 29 20 M 11 29 L 20 35 L 29 29" fill="none" stroke="#64748b" stroke-width="1.8" />
+          </svg>
+          <span class="palette-tooltip">Heat Exchanger (PHE)</span>
+        </button>
+
+        <!-- 2-Way Control Valve -->
+        <button onclick="addSandboxItem('valve')" class="palette-btn" aria-label="2-Way Control Valve">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <rect x="14" y="5" width="12" height="9" rx="1.5" fill="#0f172a" stroke="#10b981" stroke-width="1.8" />
+            <line x1="20" y1="14" x2="20" y2="24" stroke="#10b981" stroke-width="2" />
+            <polygon points="6,16 20,24 6,32" fill="#0f172a" stroke="#10b981" stroke-width="1.8" />
+            <polygon points="34,16 20,24 34,32" fill="#0f172a" stroke="#10b981" stroke-width="1.8" />
+          </svg>
+          <span class="palette-tooltip">2-Way Control Valve</span>
+        </button>
+
+        <!-- 3-Way Valve -->
+        <button onclick="addSandboxItem('valve3way')" class="palette-btn" aria-label="3-Way Mixing Valve">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <rect x="15" y="4" width="10" height="8" rx="1" fill="#0f172a" stroke="#14b8a6" stroke-width="1.8" />
+            <line x1="20" y1="12" x2="20" y2="22" stroke="#14b8a6" stroke-width="2" />
+            <polygon points="6,15 20,22 6,29" fill="#0f172a" stroke="#14b8a6" stroke-width="1.8" />
+            <polygon points="34,15 20,22 34,29" fill="#0f172a" stroke="#14b8a6" stroke-width="1.8" />
+            <polygon points="13,36 20,22 27,36" fill="#0f172a" stroke="#14b8a6" stroke-width="1.8" />
+          </svg>
+          <span class="palette-tooltip">3-Way Mixing Valve</span>
+        </button>
+
+        <!-- Check Valve -->
+        <button onclick="addSandboxItem('checkvalve')" class="palette-btn" aria-label="Check Valve">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="14" fill="#0f172a" stroke="#34d399" stroke-width="2.2" />
+            <polygon points="12,13 12,27 25,20" fill="#34d399" />
+            <line x1="25" y1="12" x2="25" y2="28" stroke="#34d399" stroke-width="2.5" />
+          </svg>
+          <span class="palette-tooltip">Non-Return Check Valve</span>
+        </button>
+
+        <!-- Temp Sensor (TT) -->
+        <button onclick="addSandboxItem('sensor')" class="palette-btn" aria-label="Temperature Sensor">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <circle cx="20" cy="14" r="11" fill="#0f172a" stroke="#a855f7" stroke-width="2.2" />
+            <line x1="20" y1="25" x2="20" y2="37" stroke="#a855f7" stroke-width="2.2" />
+            <line x1="9" y1="14" x2="31" y2="14" stroke="#a855f7" stroke-width="1" />
+            <text x="20" y="11" text-anchor="middle" fill="#a855f7" font-size="7" font-weight="bold">TT</text>
+            <text x="20" y="21" text-anchor="middle" fill="#f8fafc" font-size="6">101</text>
+          </svg>
+          <span class="palette-tooltip">Temp Transmitter (TT)</span>
+        </button>
+
+        <!-- Pressure Sensor (PT) -->
+        <button onclick="addSandboxItem('pressure')" class="palette-btn" aria-label="Pressure Sensor">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <circle cx="20" cy="14" r="11" fill="#0f172a" stroke="#38bdf8" stroke-width="2.2" />
+            <line x1="20" y1="25" x2="20" y2="37" stroke="#38bdf8" stroke-width="2.2" />
+            <line x1="9" y1="14" x2="31" y2="14" stroke="#38bdf8" stroke-width="1" />
+            <text x="20" y="11" text-anchor="middle" fill="#38bdf8" font-size="7" font-weight="bold">PT</text>
+            <text x="20" y="21" text-anchor="middle" fill="#f8fafc" font-size="6">P1</text>
+          </svg>
+          <span class="palette-tooltip">Pressure Transmitter (PT)</span>
+        </button>
+
+        <!-- Differential Pressure (DPT) -->
+        <button onclick="addSandboxItem('diffpressure')" class="palette-btn" aria-label="Differential Pressure Sensor">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <circle cx="20" cy="14" r="12" fill="#0f172a" stroke="#0ea5e9" stroke-width="2.2" />
+            <text x="20" y="12" text-anchor="middle" fill="#0ea5e9" font-size="7" font-weight="bold">DPT</text>
+            <text x="20" y="21" text-anchor="middle" fill="#f8fafc" font-size="6">ΔP</text>
+            <line x1="13" y1="26" x2="13" y2="37" stroke="#0ea5e9" stroke-width="1.8" />
+            <line x1="27" y1="26" x2="27" y2="37" stroke="#0ea5e9" stroke-width="1.8" />
+          </svg>
+          <span class="palette-tooltip">Diff Pressure (DPT)</span>
+        </button>
+
+        <!-- Flow Meter (FT) -->
+        <button onclick="addSandboxItem('flowmeter')" class="palette-btn" aria-label="Flow Meter">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <circle cx="20" cy="11" r="9" fill="#0f172a" stroke="#6366f1" stroke-width="2" />
+            <text x="20" y="14" text-anchor="middle" fill="#6366f1" font-size="7" font-weight="bold">FT</text>
+            <line x1="20" y1="20" x2="20" y2="27" stroke="#6366f1" stroke-width="2" />
+            <rect x="6" y="27" width="28" height="8" rx="2" fill="#0f172a" stroke="#818cf8" stroke-width="1.8" />
+          </svg>
+          <span class="palette-tooltip">Flow Meter (FT)</span>
+        </button>
+
+        <!-- Conductivity Sensor (CT) -->
+        <button onclick="addSandboxItem('conductivity')" class="palette-btn" aria-label="Conductivity Sensor">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <circle cx="20" cy="14" r="11" fill="#0f172a" stroke="#8b5cf6" stroke-width="2.2" />
+            <line x1="20" y1="25" x2="20" y2="37" stroke="#8b5cf6" stroke-width="2.2" />
+            <line x1="9" y1="14" x2="31" y2="14" stroke="#8b5cf6" stroke-width="1" />
+            <text x="20" y="11" text-anchor="middle" fill="#8b5cf6" font-size="7" font-weight="bold">CT</text>
+            <text x="20" y="21" text-anchor="middle" fill="#f8fafc" font-size="5.5">COND</text>
+          </svg>
+          <span class="palette-tooltip">Conductivity (CT)</span>
+        </button>
+
+        <!-- Expansion Tank -->
+        <button onclick="addSandboxItem('expansion')" class="palette-btn" aria-label="Expansion Tank">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <rect x="11" y="4" width="18" height="28" rx="7" fill="#0f172a" stroke="#f97316" stroke-width="2.2" />
+            <line x1="11" y1="18" x2="29" y2="18" stroke="#f97316" stroke-width="1.8" stroke-dasharray="2 1.5" />
+            <line x1="20" y1="32" x2="20" y2="38" stroke="#38bdf8" stroke-width="2.2" />
+          </svg>
+          <span class="palette-tooltip">Expansion Tank</span>
+        </button>
+
+        <!-- Y-Strainer -->
+        <button onclick="addSandboxItem('strainer')" class="palette-btn" aria-label="Y-Strainer Filter">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <path d="M 6 14 L 34 14 L 20 32 Z" fill="#0f172a" stroke="#eab308" stroke-width="2.2" />
+            <line x1="12" y1="19" x2="20" y2="29" stroke="#eab308" stroke-width="1.8" stroke-dasharray="2 1.5" />
+          </svg>
+          <span class="palette-tooltip">Y-Strainer Filter</span>
+        </button>
+
+        <!-- Radiator Fan Array -->
+        <button onclick="addSandboxItem('fan')" class="palette-btn" aria-label="Radiator Fan Array">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <rect x="6" y="6" width="28" height="28" rx="3" fill="#0f172a" stroke="#84cc16" stroke-width="2.2" />
+            <g class="spin-on-hover">
+              <circle cx="20" cy="20" r="4" fill="#84cc16" />
+              <path d="M 20 20 C 15 10 25 10 20 20 C 30 15 30 25 20 20 C 25 30 15 30 20 20 C 10 25 10 15 20 20" fill="#84cc16" opacity="0.85" />
+            </g>
+          </svg>
+          <span class="palette-tooltip">Radiator Fan Array</span>
+        </button>
+
+        <!-- Air Vent -->
+        <button onclick="addSandboxItem('airvent')" class="palette-btn" aria-label="Automatic Air Vent">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <line x1="20" y1="24" x2="20" y2="36" stroke="#f43f5e" stroke-width="2.2" />
+            <polygon points="12,24 28,24 20,10" fill="#0f172a" stroke="#f43f5e" stroke-width="2.2" />
+            <path d="M 16 8 L 20 3 L 24 8" fill="none" stroke="#f43f5e" stroke-width="1.8" />
+          </svg>
+          <span class="palette-tooltip">Automatic Air Vent</span>
+        </button>
+
+        <!-- Hand Valve -->
+        <button onclick="addSandboxItem('handvalve')" class="palette-btn" aria-label="Manual Hand Valve">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <line x1="14" y1="10" x2="26" y2="10" stroke="#94a3b8" stroke-width="2" />
+            <line x1="20" y1="10" x2="20" y2="20" stroke="#94a3b8" stroke-width="2" />
+            <polygon points="10,13 30,27 30,13 10,27" fill="#0f172a" stroke="#94a3b8" stroke-width="1.8" />
+          </svg>
+          <span class="palette-tooltip">Manual Hand Valve</span>
+        </button>
+
+        <!-- Water Reservoir Tank -->
+        <button onclick="addSandboxItem('watertank')" class="palette-btn" aria-label="Water / Coolant Reservoir Tank">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <rect x="7" y="9" width="26" height="22" rx="3" fill="#0f172a" stroke="#818cf8" stroke-width="2" />
+            <rect x="9" y="19" width="22" height="10" fill="#00f2ff" opacity="0.2" />
+            <line x1="9" y1="19" x2="31" y2="19" stroke="#00f2ff" stroke-width="1" stroke-dasharray="2 1" />
+          </svg>
+          <span class="palette-tooltip">Coolant Reservoir Tank</span>
+        </button>
+
+        <!-- Nitrogen (N2) Supply Bottle -->
+        <button onclick="addSandboxItem('n2bottle')" class="palette-btn" aria-label="Nitrogen (N2) Gas Bottle">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <rect x="12" y="12" width="16" height="23" rx="4" fill="#0f172a" stroke="#ffde59" stroke-width="2" />
+            <path d="M 12 16 C 12 8, 28 8, 28 16" fill="#0f172a" stroke="#ffde59" stroke-width="2" />
+            <rect x="17" y="5" width="6" height="5" fill="#0f172a" stroke="#ffde59" stroke-width="1.5" />
+          </svg>
+          <span class="palette-tooltip">Nitrogen (N2) Gas Bottle</span>
+        </button>
+
+        <!-- In-line Mesh Filter -->
+        <button onclick="addSandboxItem('filter')" class="palette-btn" aria-label="In-line Mesh Filter">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <rect x="10" y="11" width="20" height="18" rx="2" fill="#0f172a" stroke="#94a3b8" stroke-width="1.8" />
+            <line x1="10" y1="11" x2="30" y2="29" stroke="#94a3b8" stroke-width="1.5" />
+            <line x1="10" y1="29" x2="30" y2="11" stroke="#94a3b8" stroke-width="1.5" />
+          </svg>
+          <span class="palette-tooltip">In-line Mesh Filter</span>
+        </button>
+
+        <!-- Water Quality Grid -->
+        <button onclick="addSandboxItem('wqgrid')" class="palette-btn" aria-label="Coolant Quality Sensor Grid">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <rect x="5" y="10" width="30" height="20" rx="2" fill="#0f172a" stroke="#10b981" stroke-width="1.8" />
+            <text x="20" y="20" text-anchor="middle" fill="#10b981" font-size="7" font-weight="bold">pH·EC</text>
+            <text x="20" y="27" text-anchor="middle" fill="#94a3b8" font-size="6">ORP·TU</text>
+          </svg>
+          <span class="palette-tooltip">Coolant Quality Grid (pH/EC/ORP)</span>
+        </button>
+
+        <!-- Vacuum Chamber -->
+        <button onclick="addSandboxItem('vacchamber')" class="palette-btn" aria-label="Vacuum Chamber Cylinder">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <rect x="8" y="4" width="24" height="32" rx="3" fill="#0f172a" stroke="#818cf8" stroke-width="2" />
+            <circle cx="20" cy="20" r="6" stroke="#818cf8" stroke-width="1.2" stroke-dasharray="2 1.5" fill="none" />
+            <g class="spin-on-hover">
+              <path d="M 20 14 L 20 26 M 14 20 L 26 20" stroke="#818cf8" stroke-width="1.8" />
+            </g>
+          </svg>
+          <span class="palette-tooltip">Vacuum Chamber Cylinder</span>
+        </button>
+
+        <!-- Static Text Label -->
+        <button onclick="addSandboxItem('text')" class="palette-btn" aria-label="Static Text Label">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <rect x="7" y="7" width="26" height="26" rx="4" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="2 2" />
+            <text x="20" y="26" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="bold" font-family="monospace">T</text>
+          </svg>
+          <span class="palette-tooltip">Static Text Label (Header / Telemetry)</span>
+        </button>
+
+        <!-- Boundary Zone Box -->
+        <button onclick="addSandboxItem('box')" class="palette-btn" aria-label="Boundary Zone Box">
+          <svg width="34" height="34" viewBox="0 0 40 40">
+            <rect x="5" y="7" width="30" height="26" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 2" />
+            <text x="20" y="16" text-anchor="middle" fill="#94a3b8" font-size="6" font-weight="bold">ZONE</text>
+          </svg>
+          <span class="palette-tooltip">Boundary Box / Loop Zone</span>
+        </button>
+      </div>
+
+      <!-- Add Pipe Group -->
+      <div class="flex flex-wrap gap-2 items-center pl-3 border-l border-slate-700/60">
+        <span class="text-xs font-semibold text-slate-400 mr-1 flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M3 8h14m0 0l-3-3m3 3l-3 3M21 16H7m0 0l3-3m-3 3l3 3"/></svg>
+          Add Pipe:
+        </span>
+        
+        <!-- Cold Pipe Button -->
+        <button onclick="addPipeLoop('cold')" class="palette-btn w-auto px-3.5 h-12 bg-sky-500/20 text-sky-400 border border-sky-500/30 hover:bg-sky-500/30 gap-2" aria-label="Cold Supply Pipe">
+          <svg width="24" height="14" viewBox="0 0 30 12">
+            <line x1="2" y1="6" x2="28" y2="6" stroke="#0284c7" stroke-width="5" stroke-linecap="round" />
+            <line x1="2" y1="6" x2="28" y2="6" stroke="#38bdf8" stroke-width="2.5" class="flow-on-hover" stroke-linecap="round" />
+          </svg>
+          <span class="text-xs font-bold">Cold Pipe</span>
+          <span class="palette-tooltip">Add Cold Supply Pipe (Blue)</span>
+        </button>
+
+        <!-- Hot Pipe Button -->
+        <button onclick="addPipeLoop('hot')" class="palette-btn w-auto px-3.5 h-12 bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 gap-2" aria-label="Hot Return Pipe">
+          <svg width="24" height="14" viewBox="0 0 30 12">
+            <line x1="2" y1="6" x2="28" y2="6" stroke="#b91c1c" stroke-width="5" stroke-linecap="round" />
+            <line x1="2" y1="6" x2="28" y2="6" stroke="#ef4444" stroke-width="2.5" class="flow-on-hover" stroke-linecap="round" />
+          </svg>
+          <span class="text-xs font-bold">Hot Pipe</span>
+          <span class="palette-tooltip">Add Hot Return Pipe (Red)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Secondary Action Toolbar -->
+    <div class="flex flex-wrap justify-between items-center mb-4 gap-3 bg-[var(--background,#0f172a)] p-2.5 rounded-xl border border-[var(--border,#334155)]">
+      <!-- Left: Selected Item Controls -->
+      <div class="flex flex-wrap gap-2 items-center">
+        <span class="text-xs font-semibold text-slate-400 mr-1">Selected Item:</span>
+        <button id="sizeUpBtn" onclick="scaleSelected(1.1)" class="action-btn bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-700 shadow-sm" title="Scale component graphic +10%">
+          <span>🔍</span> Size +10%
+        </button>
+        <button id="sizeDownBtn" onclick="scaleSelected(0.9)" class="action-btn bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-700 shadow-sm" title="Scale component graphic -10%">
+          <span>🔍</span> Size -10%
+        </button>
+        <button id="editTextBtn" onclick="editSelectedText()" class="action-btn bg-blue-600/20 text-blue-300 hover:bg-blue-600/30 border border-blue-500/30 shadow-sm" title="Edit text content / label">
+          <span>✏️</span> Edit Text
+        </button>
+        <button id="textSizeUpBtn" onclick="scaleSelectedText(1.15)" class="action-btn bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-700 shadow-sm" title="Increase component text label size">
+          <span>🔤</span> Text +
+        </button>
+        <button id="textSizeDownBtn" onclick="scaleSelectedText(0.85)" class="action-btn bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-700 shadow-sm" title="Decrease component text label size">
+          <span>🔤</span> Text -
+        </button>
+        <button id="rotateBtn" onclick="rotateSelected()" class="action-btn bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-700 shadow-sm" title="Rotate component 90 degrees">
+          <span>🔄</span> Rotate 90°
+        </button>
+        <button id="deleteBtn" onclick="deleteSelected()" class="action-btn bg-red-600/20 text-red-400 border border-red-500/30 hover:bg-red-600/30 shadow-sm" title="Delete selected item">
+          <span>❌</span> Delete
+        </button>
+      </div>
+
+      <!-- Right: Canvas Controls -->
+      <div class="flex flex-wrap items-center gap-2">
+        <!-- Canvas Expansion Controls -->
+        <div class="flex items-center gap-1.5 bg-slate-800/90 p-1 rounded-lg border border-slate-700">
+          <span class="text-[11px] font-semibold text-slate-300 px-1.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+            <span id="canvasDimensionBadge" class="text-sky-300 font-mono text-[10.5px]">1200x580</span>
+          </span>
+          <button onclick="autoFitCanvasToViewport(true)" class="action-btn h-7 px-2.5 bg-blue-600/20 text-blue-300 hover:bg-blue-600/30 border border-blue-500/40 text-xs shadow-sm" title="Automatically fit canvas size to match visible viewport container">
+            <span>📐</span> Auto-Fit Viewport
+          </button>
+          <button onclick="resizeCanvas(200, 100)" class="action-btn h-7 px-2.5 bg-slate-700 text-slate-200 hover:bg-slate-600 border border-slate-600 text-xs shadow-sm" title="Expand Canvas Width & Height (+200x100px)">
+            <span>➕</span> Expand
+          </button>
+          <button onclick="resizeCanvas(-200, -100)" class="action-btn h-7 px-2 bg-slate-700 text-slate-300 hover:bg-slate-600 border border-slate-600 text-xs shadow-sm" title="Contract Canvas Width & Height (-200x100px)">
+            <span>➖</span>
+          </button>
+          <button onclick="resetCanvasSize()" class="action-btn h-7 px-2 bg-slate-700 text-slate-300 hover:bg-slate-600 border border-slate-600 text-[11px] shadow-sm" title="Reset Canvas Size">
+            Reset
+          </button>
+        </div>
+
+        <button onclick="toggleSnapGrid()" id="snapToggleBtn" class="action-btn bg-blue-600/20 text-blue-400 border border-blue-500/30 hover:bg-blue-600/30 shadow-sm">
+          <span>🧲</span> Snap: ON (20px)
+        </button>
+        <button onclick="toggleAnimations()" id="animToggleBtn" class="action-btn bg-slate-800 text-blue-400 border border-blue-500/30 hover:bg-slate-700 shadow-sm">
+          <span>⚡</span> Anim: ACTIVE
+        </button>
+        <div class="h-6 w-px bg-slate-700 mx-0.5"></div>
+        <button onclick="toggleOutlinerCollapse()" id="toggleOutlinerBtn" class="action-btn bg-slate-800 text-sky-400 border border-slate-700 hover:bg-slate-700 shadow-sm" title="Toggle Component Outliner & Layer Manager">
+          <span>📋</span> Layers <span id="outlinerLayerCountBadge" class="ml-1 px-1.5 py-0.2 bg-sky-500/20 text-sky-300 rounded-full text-[10px] font-mono">0</span>
+        </button>
+        <button onclick="openImportModal()" class="action-btn bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 hover:text-white shadow-sm" title="Import SVG or JSX snippet into the CAD canvas">
+          <span>📥</span> Import JSX / SVG
+        </button>
+        <button onclick="clearSandbox()" class="action-btn bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700 hover:text-slate-200 shadow-sm">
+          <span>🗑️</span> Clear
+        </button>
+        <button onclick="openExportModal()" class="action-btn bg-blue-600 text-white hover:bg-blue-500 shadow font-bold" title="Export as clean SVG or ready-to-paste JSX for CDUSchematic components">
+          <span>💾</span> Export JSX / SVG
+        </button>
+      </div>
+    </div>
+
+    <!-- Live SVG Assembly Viewport & Docked Outliner Panel -->
+    <div id="canvasRowContainer" class="flex gap-3 items-stretch min-h-[520px]">
+      <!-- 1. Expandable Scrollable 1:1 CAD Workspace -->
+      <div class="canvas-viewport p-0 select-none overflow-auto flex-1" id="canvasViewport">
+        <svg id="sandboxCanvas" width="1200" height="580" viewBox="0 0 1200 580" class="block show-ports" style="width: 1200px; height: 580px;">
+          <!-- Background Gridlines (20px Grid) -->
+          <defs>
+            <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1" />
+            </pattern>
+          </defs>
+          <rect id="gridBackgroundRect" width="1200" height="580" fill="url(#gridPattern)" />
+
+          <!-- Dynamic Pipe Lines Container -->
+          <g id="sandboxPipesContainer">
+          </g>
+
+          <!-- Dynamic Drag & Drop Components Container -->
+          <g id="sandboxItemsContainer">
+          </g>
+        </svg>
+      </div>
+
+      <!-- 2. Docked Component Outliner & Z-Order Layer Manager (Height matches canvas viewport) -->
+      <aside id="outlinerPanel" class="outliner-panel w-[260px] shrink-0 p-3 shadow-lg flex flex-col justify-between self-stretch" aria-label="Component Outliner and Layer Manager">
+        <!-- Panel Header -->
+        <div class="pb-2.5 border-b border-slate-700/80 flex justify-between items-center shrink-0">
+          <div class="flex items-center gap-1.5 min-w-0">
+            <span class="text-sm">📋</span>
+            <span id="outlinerTitleText" class="text-xs font-bold text-slate-200 tracking-wide truncate">LAYERS</span>
+            <span id="outlinerHeaderCount" class="text-[10px] text-sky-400 font-mono font-semibold">(0)</span>
+          </div>
+          <button onclick="toggleOutlinerCollapse()" class="outliner-btn-mini text-xs" title="Hide / Close Outliner">
+            <span id="outlinerToggleIcon">✕</span>
+          </button>
+        </div>
+
+        <!-- Outliner Main Content Area -->
+        <div id="outlinerContent" class="flex flex-col flex-1 min-h-0 pt-2.5 overflow-hidden">
+          <!-- Z-Order Action Controls -->
+          <div class="flex items-center justify-between gap-1 p-1.5 mb-2 bg-slate-900/90 rounded-lg border border-slate-800 shrink-0">
+            <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider pl-1">Order:</span>
+            <div class="flex items-center gap-1">
+              <button id="layerBtnTop" onclick="bringSelectedToFront()" class="outliner-btn-mini" title="Bring to Front / Top Layer (Ctrl+Shift+])" disabled>
+                ⏫
+              </button>
+              <button id="layerBtnUp" onclick="moveSelectedUp()" class="outliner-btn-mini" title="Move Layer Up +1 (Ctrl+])" disabled>
+                ▲
+              </button>
+              <button id="layerBtnDown" onclick="moveSelectedDown()" class="outliner-btn-mini" title="Move Layer Down -1 (Ctrl+[)" disabled>
+                ▼
+              </button>
+              <button id="layerBtnBottom" onclick="sendSelectedToBack()" class="outliner-btn-mini" title="Send to Back / Bottom Layer (Ctrl+Shift+[)" disabled>
+                ⏬
+              </button>
+            </div>
+          </div>
+
+          <!-- Real-Time Stacking Layer List (Flexibly fills viewport height with scroll) -->
+          <div id="outlinerList" class="flex-1 overflow-y-auto layer-scrollbar flex flex-col gap-1 pr-1 min-h-0">
+            <!-- Dynamically generated via cdu_outliner.js -->
+          </div>
+
+          <!-- Bottom Shortcut Tip -->
+          <div class="pt-2 border-t border-slate-800/80 text-[10px] text-slate-400 flex justify-between items-center shrink-0">
+            <span>Tip: Click layer to select</span>
+            <span class="font-mono text-slate-400 text-[9px]">Ctrl+[/]</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 2. BOTTOM SECTION: COMPONENT CATALOG REFERENCE -->
+  <section id="componentCatalog">
+    <div class="mb-4 flex flex-wrap justify-between items-center gap-4">
+      <div>
+        <h2 class="text-lg font-bold text-[var(--foreground)] flex items-center gap-2">
+          📖 ISA-5.1 Standard Component Symbol Catalog
+        </h2>
+        <p class="text-xs text-[var(--muted-foreground,#94a3b8)]">
+          Browse visual variants or click any component's copy button to paste its SVG code directly into custom schematics.
+        </p>
+      </div>
+    </div>
+
+    <!-- Category Nav Bar -->
+    <nav class="flex flex-wrap gap-2 mb-6 bg-[var(--card,#1e293b)] p-2 rounded-xl border border-[var(--border,#334155)]">
+      <button onclick="filterCategory('all')" class="cat-btn px-4 py-1.5 text-xs font-medium rounded-lg bg-blue-600 text-white transition" data-cat="all">All Components</button>
+      <button onclick="filterCategory('pumps')" class="cat-btn px-4 py-1.5 text-xs font-medium rounded-lg text-[var(--muted-foreground,#94a3b8)] hover:text-white transition" data-cat="pumps">Pumps & Heat Exchangers</button>
+      <button onclick="filterCategory('valves')" class="cat-btn px-4 py-1.5 text-xs font-medium rounded-lg text-[var(--muted-foreground,#94a3b8)] hover:text-white transition" data-cat="valves">Valves & Control</button>
+      <button onclick="filterCategory('sensors')" class="cat-btn px-4 py-1.5 text-xs font-medium rounded-lg text-[var(--muted-foreground,#94a3b8)] hover:text-white transition" data-cat="sensors">Sensors & Instruments</button>
+      <button onclick="filterCategory('vessels')" class="cat-btn px-4 py-1.5 text-xs font-medium rounded-lg text-[var(--muted-foreground,#94a3b8)] hover:text-white transition" data-cat="vessels">Hardware & Vessels</button>
+      <button onclick="filterCategory('labels')" class="cat-btn px-4 py-1.5 text-xs font-medium rounded-lg text-[var(--muted-foreground,#94a3b8)] hover:text-white transition" data-cat="labels">Labels & Annotations</button>
+    </nav>
+
+    <!-- Dynamically Rendered Component Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 mb-12" id="componentGrid">
+      <!-- Generated automatically via cdu_components.js renderCatalogGrid() -->
+    </div>
+  </section>
+
+  <!-- EXPORT JSX / SVG MODAL -->
+  <div id="exportModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/80">
+        <div class="flex items-center gap-2.5">
+          <span class="text-xl">💾</span>
+          <div>
+            <h3 class="font-bold text-base text-slate-100">Export Schematic for React JSX & SVG</h3>
+            <p class="text-xs text-slate-400">Ready-to-use SVG and React JSX code for CDU Schematic Components (e.g. CDUSchematic100kW.jsx)</p>
+          </div>
+        </div>
+        <button onclick="closeExportModal()" class="text-slate-400 hover:text-white p-1 rounded-lg text-lg">✕</button>
+      </div>
+
+      <div class="px-6 pt-4 pb-2 flex flex-wrap justify-between items-center gap-3 border-b border-slate-800/80 bg-slate-950/40">
+        <div class="flex gap-2">
+          <button id="tabJsxBtn" onclick="switchExportTab('jsx')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-blue-600 text-white transition">React JSX Code</button>
+          <button id="tabSvgBtn" onclick="switchExportTab('svg')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Raw SVG Markup</button>
+        </div>
+        <div class="flex items-center gap-2">
+          <label for="exportTargetPreset" class="text-xs text-slate-400 font-medium">Preset Target:</label>
+          <select id="exportTargetPreset" onchange="generateExportCode()" class="bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-blue-500">
+            <option value="generic">Generic CDU Schematic Component</option>
+            <option value="100kw">CDUSchematic100kW.jsx</option>
+            <option value="300kw">CDUSchematic300kW.jsx</option>
+            <option value="30kw">CDUSchematic30kW.jsx</option>
+            <option value="75kw">CDUSchematic75kW.jsx</option>
+            <option value="2-5mw">CDUSchematic2-5MW.jsx</option>
+            <option value="vacuum_n2">CDUSchematicVacuumN2.jsx</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="p-6 overflow-auto flex-1 bg-slate-950">
+        <textarea id="exportCodeTextarea" readonly class="w-full h-80 bg-slate-900 border border-slate-800 rounded-xl p-4 font-mono text-xs text-emerald-300 select-all resize-none focus:outline-none leading-relaxed"></textarea>
+      </div>
+
+      <div class="px-6 py-4 border-t border-slate-800 bg-slate-900 flex justify-between items-center gap-3">
+        <span class="text-xs text-slate-400" id="exportStatsLabel">Ready to copy</span>
+        <div class="flex gap-2">
+          <button onclick="closeExportModal()" class="action-btn bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700">Close</button>
+          <button onclick="copyExportCode()" class="action-btn bg-blue-600 text-white hover:bg-blue-500 shadow font-bold">📋 Copy Code</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPORT JSX / SVG MODAL -->
+  <div id="importModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/80">
+        <div class="flex items-center gap-2.5">
+          <span class="text-xl">📥</span>
+          <div>
+            <h3 class="font-bold text-base text-slate-100">Import Existing Schematic into CAD Canvas</h3>
+            <p class="text-xs text-slate-400">Load preset CDU JSX files or paste JSX/SVG markup to edit visually</p>
+          </div>
+        </div>
+        <button onclick="closeImportModal()" class="text-slate-400 hover:text-white p-1 rounded-lg text-lg">✕</button>
+      </div>
+
+      <div class="px-6 py-3 border-b border-slate-800/80 bg-slate-950/40 flex flex-wrap items-center justify-between gap-3">
+        <span class="text-xs text-slate-300 font-medium">Quick Load Schematic Preset:</span>
+        <div class="flex flex-wrap gap-1.5">
+          <button onclick="loadPresetSchematic('100kw')" class="px-2.5 py-1 text-xs rounded bg-slate-800 text-slate-300 hover:bg-blue-600 hover:text-white transition">100kW Dual Loop</button>
+          <button onclick="loadPresetSchematic('30kw')" class="px-2.5 py-1 text-xs rounded bg-slate-800 text-slate-300 hover:bg-blue-600 hover:text-white transition">30kW Liquid-to-Air</button>
+          <button onclick="loadPresetSchematic('75kw')" class="px-2.5 py-1 text-xs rounded bg-slate-800 text-slate-300 hover:bg-blue-600 hover:text-white transition">75kW Dual Fan</button>
+          <button onclick="loadPresetSchematic('vacuum')" class="px-2.5 py-1 text-xs rounded bg-slate-800 text-slate-300 hover:bg-blue-600 hover:text-white transition">Vacuum N2</button>
+        </div>
+      </div>
+
+      <div class="p-6 flex-1 bg-slate-950 flex flex-col gap-2">
+        <label for="importCodeTextarea" class="text-xs text-slate-400 font-medium">Or paste SVG markup / JSX &lt;svg&gt;...&lt;/svg&gt; block here:</label>
+        <textarea id="importCodeTextarea" placeholder="Paste <svg ...>...</svg> or JSX return block here..." class="w-full h-64 bg-slate-900 border border-slate-800 rounded-xl p-4 font-mono text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-blue-500 resize-none leading-relaxed"></textarea>
+      </div>
+
+      <div class="px-6 py-4 border-t border-slate-800 bg-slate-900 flex justify-between items-center gap-3">
+        <span class="text-xs text-slate-400">Loads elements into active CAD sandbox</span>
+        <div class="flex gap-2">
+          <button onclick="closeImportModal()" class="action-btn bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700">Cancel</button>
+          <button onclick="applyImportCode()" class="action-btn bg-blue-600 text-white hover:bg-blue-500 shadow font-bold">🚀 Load into Canvas</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 bg-blue-600 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-2xl transition transform translate-y-20 opacity-0 flex items-center gap-2 pointer-events-none z-50">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+    <span id="toastMsg">SVG snippet copied to clipboard!</span>
+  </div>
+
+  <!-- Modular CAD Scripts (Option B: Works on Windows, Linux, and macOS without CORS errors in local file:// mode) -->
+  <script src="./js/cdu_components.js"></script>
+  <script src="./js/cdu_cad_engine.js"></script>
+  <script src="./js/cdu_presets_export.js"></script>
+  <script src="./js/cdu_outliner.js"></script>
+
+  <script>
+    // Initialize component catalog grid dynamically on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.renderCatalogGrid) {
+        window.renderCatalogGrid('componentGrid');
+      }
+    });
+  </script>
+</body>
+</html>
