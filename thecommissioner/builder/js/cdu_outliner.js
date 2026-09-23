@@ -110,22 +110,26 @@
 
   function refreshOutliner() {
     const listContainer = document.getElementById('outlinerList');
+    const mobileListContainer = document.getElementById('mobileOutlinerList');
     const countBadge = document.getElementById('outlinerLayerCountBadge');
     const headerCount = document.getElementById('outlinerHeaderCount');
-    if (!listContainer) return;
+    const mobileCount = document.getElementById('mobileLayerCountBadge');
 
     const allItems = getAllCanvasItemsInZOrder();
     const count = allItems.length;
 
     if (countBadge) countBadge.innerText = count;
     if (headerCount) headerCount.innerText = `(${count})`;
+    if (mobileCount) mobileCount.innerText = count;
 
     if (count === 0) {
-      listContainer.innerHTML = `
-        <div class="p-6 text-center text-xs text-slate-500 flex flex-col items-center gap-2">
+      const emptyHtml = `
+        <div class="p-4 text-center text-xs text-slate-500 flex flex-col items-center gap-1">
           <span>📭</span>
           <span>No items on canvas.<br>Add components or pipes to see layers here.</span>
         </div>`;
+      if (listContainer) listContainer.innerHTML = emptyHtml;
+      if (mobileListContainer) mobileListContainer.innerHTML = emptyHtml;
       updateLayerActionButtons(null);
       return;
     }
@@ -159,7 +163,8 @@
         </div>`;
     });
 
-    listContainer.innerHTML = html;
+    if (listContainer) listContainer.innerHTML = html;
+    if (mobileListContainer) mobileListContainer.innerHTML = html;
 
     const selectedElem = document.querySelector('.draggable-item.selected');
     updateLayerActionButtons(selectedElem);

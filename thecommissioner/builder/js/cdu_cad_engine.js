@@ -39,6 +39,40 @@
     svgCanvas.addEventListener('mousemove', handleInteraction);
     svgCanvas.addEventListener('mouseup', endInteraction);
     svgCanvas.addEventListener('mouseleave', endInteraction);
+
+    // Touch Support for Mobile & Tablet Devices
+    svgCanvas.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches.length === 1) {
+        const touch = e.touches[0];
+        // Only prevent default if touching an active draggable item or handle
+        const target = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (target && (target.closest('.draggable-item') || target.closest('.pipe-handle'))) {
+          e.preventDefault();
+        }
+        startInteraction({
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+          target: target,
+          preventDefault: () => e.preventDefault()
+        });
+      }
+    }, { passive: false });
+
+    svgCanvas.addEventListener('touchmove', (e) => {
+      if (isDragging && e.touches && e.touches.length === 1) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        handleInteraction({
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+          preventDefault: () => e.preventDefault()
+        });
+      }
+    }, { passive: false });
+
+    svgCanvas.addEventListener('touchend', endInteraction);
+    svgCanvas.addEventListener('touchcancel', endInteraction);
+
     svgCanvas.addEventListener('dblclick', (e) => {
       const item = e.target.closest('.draggable-item');
       if (item && item.getAttribute('data-type') === 'comp') {
@@ -556,6 +590,17 @@
     updateConnectedPipes(selectedElement.id);
   }
 
+  function inspectSelectedComponent() {
+    if (!selectedElement) {
+      if (window.showToast) window.showToast('Please select a component on the canvas first!');
+      return;
+    }
+    const compType = selectedElement.getAttribute('data-comp-type') || selectedElement.getAttribute('data-type');
+    if (window.showComponentDetails) {
+      window.showComponentDetails(compType || 'pump');
+    }
+  }
+
   function updateSelectionControls() {
     const rotateBtn = document.getElementById('rotateBtn');
     const sizeUpBtn = document.getElementById('sizeUpBtn');
@@ -805,6 +850,7 @@
   window.editSelectedText = editSelectedText;
   window.rotateSelected = rotateSelected;
   window.deleteSelected = deleteSelected;
+  window.inspectSelectedComponent = inspectSelectedComponent;
   window.addPipeLoop = addPipeLoop;
   window.addSandboxItem = addSandboxItem;
   window.clearSandbox = clearSandbox;
