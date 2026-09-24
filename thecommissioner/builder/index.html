@@ -25,7 +25,12 @@
       </p>
     </div>
     <div>
-      <a href="../index.html" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-blue-500/40 text-blue-400 hover:text-white hover:bg-blue-600/20 text-xs font-semibold tracking-wide transition shadow-sm">
+      <div class="flex items-center gap-2 mr-3 inline-flex">
+        <span class="text-[11px] text-slate-400 font-mono">TARGET_SCHEMATIC:</span>
+        <span id="activeSchematicHeaderBadge" class="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">100KW DUAL LOOP</span>
+        <span id="unsavedChangesBadge" class="hidden text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-mono animate-pulse">● MODIFIED</span>
+      </div>
+      <a id="returnToDashboardBtn" href="../index.html" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-blue-500/40 text-blue-400 hover:text-white hover:bg-blue-600/20 text-xs font-semibold tracking-wide transition shadow-sm cursor-pointer">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
@@ -53,242 +58,12 @@
       <!-- Component & Pipe Palette Toolbar -->
       <div class="mb-4 p-3 bg-[var(--background,#0f172a)] rounded-xl border border-[var(--border,#334155)] flex flex-wrap items-center justify-between gap-3">
       <!-- Add Component Group -->
-      <div class="flex flex-wrap gap-2 items-center">
+      <div class="flex flex-wrap gap-2 items-center" id="desktopAddComponentGroup">
         <span class="text-xs font-semibold text-slate-400 mr-1 flex items-center gap-1.5">
           <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
           Add Component:
         </span>
-        
-        <!-- Pump -->
-        <button onclick="addSandboxItem('pump')" class="palette-btn" aria-label="Centrifugal Fluid Pump">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <circle cx="20" cy="20" r="14" fill="#0f172a" stroke="#3b82f6" stroke-width="2.5" />
-            <polygon points="14,12 14,28 28,20" fill="#3b82f6" class="spin-on-hover" />
-          </svg>
-          <span class="palette-tooltip">Centrifugal Pump (PUMP)</span>
-        </button>
-
-        <!-- Heat Exchanger -->
-        <button onclick="addSandboxItem('phe')" class="palette-btn" aria-label="Plate Heat Exchanger">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <rect x="7" y="5" width="26" height="30" rx="3" fill="#0f172a" stroke="#f59e0b" stroke-width="2" />
-            <path d="M 11 11 L 20 17 L 29 11 M 11 20 L 20 26 L 29 20 M 11 29 L 20 35 L 29 29" fill="none" stroke="#64748b" stroke-width="1.8" />
-          </svg>
-          <span class="palette-tooltip">Heat Exchanger (PHE)</span>
-        </button>
-
-        <!-- 2-Way Control Valve -->
-        <button onclick="addSandboxItem('valve')" class="palette-btn" aria-label="2-Way Control Valve">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <rect x="14" y="5" width="12" height="9" rx="1.5" fill="#0f172a" stroke="#10b981" stroke-width="1.8" />
-            <line x1="20" y1="14" x2="20" y2="24" stroke="#10b981" stroke-width="2" />
-            <polygon points="6,16 20,24 6,32" fill="#0f172a" stroke="#10b981" stroke-width="1.8" />
-            <polygon points="34,16 20,24 34,32" fill="#0f172a" stroke="#10b981" stroke-width="1.8" />
-          </svg>
-          <span class="palette-tooltip">2-Way Control Valve</span>
-        </button>
-
-        <!-- 3-Way Valve -->
-        <button onclick="addSandboxItem('valve3way')" class="palette-btn" aria-label="3-Way Mixing Valve">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <rect x="15" y="4" width="10" height="8" rx="1" fill="#0f172a" stroke="#14b8a6" stroke-width="1.8" />
-            <line x1="20" y1="12" x2="20" y2="22" stroke="#14b8a6" stroke-width="2" />
-            <polygon points="6,15 20,22 6,29" fill="#0f172a" stroke="#14b8a6" stroke-width="1.8" />
-            <polygon points="34,15 20,22 34,29" fill="#0f172a" stroke="#14b8a6" stroke-width="1.8" />
-            <polygon points="13,36 20,22 27,36" fill="#0f172a" stroke="#14b8a6" stroke-width="1.8" />
-          </svg>
-          <span class="palette-tooltip">3-Way Mixing Valve</span>
-        </button>
-
-        <!-- Check Valve -->
-        <button onclick="addSandboxItem('checkvalve')" class="palette-btn" aria-label="Check Valve">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <circle cx="20" cy="20" r="14" fill="#0f172a" stroke="#34d399" stroke-width="2.2" />
-            <polygon points="12,13 12,27 25,20" fill="#34d399" />
-            <line x1="25" y1="12" x2="25" y2="28" stroke="#34d399" stroke-width="2.5" />
-          </svg>
-          <span class="palette-tooltip">Non-Return Check Valve</span>
-        </button>
-
-        <!-- Temp Sensor (TT) -->
-        <button onclick="addSandboxItem('sensor')" class="palette-btn" aria-label="Temperature Sensor">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <circle cx="20" cy="14" r="11" fill="#0f172a" stroke="#a855f7" stroke-width="2.2" />
-            <line x1="20" y1="25" x2="20" y2="37" stroke="#a855f7" stroke-width="2.2" />
-            <line x1="9" y1="14" x2="31" y2="14" stroke="#a855f7" stroke-width="1" />
-            <text x="20" y="11" text-anchor="middle" fill="#a855f7" font-size="7" font-weight="bold">TT</text>
-            <text x="20" y="21" text-anchor="middle" fill="#f8fafc" font-size="6">101</text>
-          </svg>
-          <span class="palette-tooltip">Temp Transmitter (TT)</span>
-        </button>
-
-        <!-- Pressure Sensor (PT) -->
-        <button onclick="addSandboxItem('pressure')" class="palette-btn" aria-label="Pressure Sensor">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <circle cx="20" cy="14" r="11" fill="#0f172a" stroke="#38bdf8" stroke-width="2.2" />
-            <line x1="20" y1="25" x2="20" y2="37" stroke="#38bdf8" stroke-width="2.2" />
-            <line x1="9" y1="14" x2="31" y2="14" stroke="#38bdf8" stroke-width="1" />
-            <text x="20" y="11" text-anchor="middle" fill="#38bdf8" font-size="7" font-weight="bold">PT</text>
-            <text x="20" y="21" text-anchor="middle" fill="#f8fafc" font-size="6">P1</text>
-          </svg>
-          <span class="palette-tooltip">Pressure Transmitter (PT)</span>
-        </button>
-
-        <!-- Differential Pressure (DPT) -->
-        <button onclick="addSandboxItem('diffpressure')" class="palette-btn" aria-label="Differential Pressure Sensor">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <circle cx="20" cy="14" r="12" fill="#0f172a" stroke="#0ea5e9" stroke-width="2.2" />
-            <text x="20" y="12" text-anchor="middle" fill="#0ea5e9" font-size="7" font-weight="bold">DPT</text>
-            <text x="20" y="21" text-anchor="middle" fill="#f8fafc" font-size="6">ΔP</text>
-            <line x1="13" y1="26" x2="13" y2="37" stroke="#0ea5e9" stroke-width="1.8" />
-            <line x1="27" y1="26" x2="27" y2="37" stroke="#0ea5e9" stroke-width="1.8" />
-          </svg>
-          <span class="palette-tooltip">Diff Pressure (DPT)</span>
-        </button>
-
-        <!-- Flow Meter (FT) -->
-        <button onclick="addSandboxItem('flowmeter')" class="palette-btn" aria-label="Flow Meter">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <circle cx="20" cy="11" r="9" fill="#0f172a" stroke="#6366f1" stroke-width="2" />
-            <text x="20" y="14" text-anchor="middle" fill="#6366f1" font-size="7" font-weight="bold">FT</text>
-            <line x1="20" y1="20" x2="20" y2="27" stroke="#6366f1" stroke-width="2" />
-            <rect x="6" y="27" width="28" height="8" rx="2" fill="#0f172a" stroke="#818cf8" stroke-width="1.8" />
-          </svg>
-          <span class="palette-tooltip">Flow Meter (FT)</span>
-        </button>
-
-        <!-- Conductivity Sensor (CT) -->
-        <button onclick="addSandboxItem('conductivity')" class="palette-btn" aria-label="Conductivity Sensor">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <circle cx="20" cy="14" r="11" fill="#0f172a" stroke="#8b5cf6" stroke-width="2.2" />
-            <line x1="20" y1="25" x2="20" y2="37" stroke="#8b5cf6" stroke-width="2.2" />
-            <line x1="9" y1="14" x2="31" y2="14" stroke="#8b5cf6" stroke-width="1" />
-            <text x="20" y="11" text-anchor="middle" fill="#8b5cf6" font-size="7" font-weight="bold">CT</text>
-            <text x="20" y="21" text-anchor="middle" fill="#f8fafc" font-size="5.5">COND</text>
-          </svg>
-          <span class="palette-tooltip">Conductivity (CT)</span>
-        </button>
-
-        <!-- Expansion Tank -->
-        <button onclick="addSandboxItem('expansion')" class="palette-btn" aria-label="Expansion Tank">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <rect x="11" y="4" width="18" height="28" rx="7" fill="#0f172a" stroke="#f97316" stroke-width="2.2" />
-            <line x1="11" y1="18" x2="29" y2="18" stroke="#f97316" stroke-width="1.8" stroke-dasharray="2 1.5" />
-            <line x1="20" y1="32" x2="20" y2="38" stroke="#38bdf8" stroke-width="2.2" />
-          </svg>
-          <span class="palette-tooltip">Expansion Tank</span>
-        </button>
-
-        <!-- Y-Strainer -->
-        <button onclick="addSandboxItem('strainer')" class="palette-btn" aria-label="Y-Strainer Filter">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <path d="M 6 14 L 34 14 L 20 32 Z" fill="#0f172a" stroke="#eab308" stroke-width="2.2" />
-            <line x1="12" y1="19" x2="20" y2="29" stroke="#eab308" stroke-width="1.8" stroke-dasharray="2 1.5" />
-          </svg>
-          <span class="palette-tooltip">Y-Strainer Filter</span>
-        </button>
-
-        <!-- Radiator Fan Array -->
-        <button onclick="addSandboxItem('fan')" class="palette-btn" aria-label="Radiator Fan Array">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <rect x="6" y="6" width="28" height="28" rx="3" fill="#0f172a" stroke="#84cc16" stroke-width="2.2" />
-            <g class="spin-on-hover">
-              <circle cx="20" cy="20" r="4" fill="#84cc16" />
-              <path d="M 20 20 C 15 10 25 10 20 20 C 30 15 30 25 20 20 C 25 30 15 30 20 20 C 10 25 10 15 20 20" fill="#84cc16" opacity="0.85" />
-            </g>
-          </svg>
-          <span class="palette-tooltip">Radiator Fan Array</span>
-        </button>
-
-        <!-- Air Vent -->
-        <button onclick="addSandboxItem('airvent')" class="palette-btn" aria-label="Automatic Air Vent">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <line x1="20" y1="24" x2="20" y2="36" stroke="#f43f5e" stroke-width="2.2" />
-            <polygon points="12,24 28,24 20,10" fill="#0f172a" stroke="#f43f5e" stroke-width="2.2" />
-            <path d="M 16 8 L 20 3 L 24 8" fill="none" stroke="#f43f5e" stroke-width="1.8" />
-          </svg>
-          <span class="palette-tooltip">Automatic Air Vent</span>
-        </button>
-
-        <!-- Hand Valve -->
-        <button onclick="addSandboxItem('handvalve')" class="palette-btn" aria-label="Manual Hand Valve">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <line x1="14" y1="10" x2="26" y2="10" stroke="#94a3b8" stroke-width="2" />
-            <line x1="20" y1="10" x2="20" y2="20" stroke="#94a3b8" stroke-width="2" />
-            <polygon points="10,13 30,27 30,13 10,27" fill="#0f172a" stroke="#94a3b8" stroke-width="1.8" />
-          </svg>
-          <span class="palette-tooltip">Manual Hand Valve</span>
-        </button>
-
-        <!-- Water Reservoir Tank -->
-        <button onclick="addSandboxItem('watertank')" class="palette-btn" aria-label="Water / Coolant Reservoir Tank">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <rect x="7" y="9" width="26" height="22" rx="3" fill="#0f172a" stroke="#818cf8" stroke-width="2" />
-            <rect x="9" y="19" width="22" height="10" fill="#00f2ff" opacity="0.2" />
-            <line x1="9" y1="19" x2="31" y2="19" stroke="#00f2ff" stroke-width="1" stroke-dasharray="2 1" />
-          </svg>
-          <span class="palette-tooltip">Coolant Reservoir Tank</span>
-        </button>
-
-        <!-- Nitrogen (N2) Supply Bottle -->
-        <button onclick="addSandboxItem('n2bottle')" class="palette-btn" aria-label="Nitrogen (N2) Gas Bottle">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <rect x="12" y="12" width="16" height="23" rx="4" fill="#0f172a" stroke="#ffde59" stroke-width="2" />
-            <path d="M 12 16 C 12 8, 28 8, 28 16" fill="#0f172a" stroke="#ffde59" stroke-width="2" />
-            <rect x="17" y="5" width="6" height="5" fill="#0f172a" stroke="#ffde59" stroke-width="1.5" />
-          </svg>
-          <span class="palette-tooltip">Nitrogen (N2) Gas Bottle</span>
-        </button>
-
-        <!-- In-line Mesh Filter -->
-        <button onclick="addSandboxItem('filter')" class="palette-btn" aria-label="In-line Mesh Filter">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <rect x="10" y="11" width="20" height="18" rx="2" fill="#0f172a" stroke="#94a3b8" stroke-width="1.8" />
-            <line x1="10" y1="11" x2="30" y2="29" stroke="#94a3b8" stroke-width="1.5" />
-            <line x1="10" y1="29" x2="30" y2="11" stroke="#94a3b8" stroke-width="1.5" />
-          </svg>
-          <span class="palette-tooltip">In-line Mesh Filter</span>
-        </button>
-
-        <!-- Water Quality Grid -->
-        <button onclick="addSandboxItem('wqgrid')" class="palette-btn" aria-label="Coolant Quality Sensor Grid">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <rect x="5" y="10" width="30" height="20" rx="2" fill="#0f172a" stroke="#10b981" stroke-width="1.8" />
-            <text x="20" y="20" text-anchor="middle" fill="#10b981" font-size="7" font-weight="bold">pH·EC</text>
-            <text x="20" y="27" text-anchor="middle" fill="#94a3b8" font-size="6">ORP·TU</text>
-          </svg>
-          <span class="palette-tooltip">Coolant Quality Grid (pH/EC/ORP)</span>
-        </button>
-
-        <!-- Vacuum Chamber -->
-        <button onclick="addSandboxItem('vacchamber')" class="palette-btn" aria-label="Vacuum Chamber Cylinder">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <rect x="8" y="4" width="24" height="32" rx="3" fill="#0f172a" stroke="#818cf8" stroke-width="2" />
-            <circle cx="20" cy="20" r="6" stroke="#818cf8" stroke-width="1.2" stroke-dasharray="2 1.5" fill="none" />
-            <g class="spin-on-hover">
-              <path d="M 20 14 L 20 26 M 14 20 L 26 20" stroke="#818cf8" stroke-width="1.8" />
-            </g>
-          </svg>
-          <span class="palette-tooltip">Vacuum Chamber Cylinder</span>
-        </button>
-
-        <!-- Static Text Label -->
-        <button onclick="addSandboxItem('text')" class="palette-btn" aria-label="Static Text Label">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <rect x="7" y="7" width="26" height="26" rx="4" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="2 2" />
-            <text x="20" y="26" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="bold" font-family="monospace">T</text>
-          </svg>
-          <span class="palette-tooltip">Static Text Label (Header / Telemetry)</span>
-        </button>
-
-        <!-- Boundary Zone Box -->
-        <button onclick="addSandboxItem('box')" class="palette-btn" aria-label="Boundary Zone Box">
-          <svg width="34" height="34" viewBox="0 0 40 40">
-            <rect x="5" y="7" width="30" height="26" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 2" />
-            <text x="20" y="16" text-anchor="middle" fill="#94a3b8" font-size="6" font-weight="bold">ZONE</text>
-          </svg>
-          <span class="palette-tooltip">Boundary Box / Loop Zone</span>
-        </button>
+        <div id="desktopPaletteButtons" class="flex flex-wrap gap-2 items-center"></div>
       </div>
 
       <!-- Add Pipe Group -->
@@ -624,205 +399,7 @@
     <!-- Level 2 Sub-Trays: Detailed tools per Category -->
     <div class="mobile-tray-scroll">
       <!-- 1. Components Tray -->
-      <div id="tray-components" class="grid grid-cols-4 sm:grid-cols-6 gap-2">
-        <!-- Pump -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('pump')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="#0f172a" stroke="#3b82f6" stroke-width="2.5" /><polygon points="14,12 14,28 28,20" fill="#3b82f6" /></svg>
-            <span class="truncate mt-0.5">Pump</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('pump');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-blue-400 border border-slate-700 hover:border-blue-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Pump Details">ⓘ</button>
-        </div>
-
-        <!-- PHE -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('phe')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><rect x="7" y="5" width="26" height="30" rx="3" fill="#0f172a" stroke="#f59e0b" stroke-width="2" /></svg>
-            <span class="truncate mt-0.5">PHE</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('phe');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-amber-400 border border-slate-700 hover:border-amber-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect PHE Details">ⓘ</button>
-        </div>
-
-        <!-- Valve -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('valve')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><polygon points="6,16 20,24 6,32" fill="#0f172a" stroke="#10b981" stroke-width="1.8" /><polygon points="34,16 20,24 34,32" fill="#0f172a" stroke="#10b981" stroke-width="1.8" /></svg>
-            <span class="truncate mt-0.5">Valve</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('valve');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-emerald-400 border border-slate-700 hover:border-emerald-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Valve Details">ⓘ</button>
-        </div>
-
-        <!-- 3-Way Valve -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('valve3way')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><polygon points="6,15 20,22 6,29" fill="#0f172a" stroke="#14b8a6" stroke-width="1.8" /><polygon points="34,15 20,22 34,29" fill="#0f172a" stroke="#14b8a6" stroke-width="1.8" /><polygon points="13,36 20,22 27,36" fill="#0f172a" stroke="#14b8a6" stroke-width="1.8" /></svg>
-            <span class="truncate mt-0.5">3-Way</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('valve3way');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-teal-400 border border-slate-700 hover:border-teal-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect 3-Way Valve Details">ⓘ</button>
-        </div>
-
-        <!-- Check Valve -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('checkvalve')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="#0f172a" stroke="#34d399" stroke-width="2.2" /><polygon points="12,13 12,27 25,20" fill="#34d399" /></svg>
-            <span class="truncate mt-0.5">Check</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('checkvalve');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-emerald-400 border border-slate-700 hover:border-emerald-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Check Valve Details">ⓘ</button>
-        </div>
-
-        <!-- Temp Sensor (TT) -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('sensor')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><circle cx="20" cy="14" r="11" fill="#0f172a" stroke="#a855f7" stroke-width="2.2" /><text x="20" y="18" text-anchor="middle" fill="#a855f7" font-size="9" font-weight="bold">TT</text></svg>
-            <span class="truncate mt-0.5">Temp (TT)</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('sensor');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-purple-400 border border-slate-700 hover:border-purple-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Temp Sensor Details">ⓘ</button>
-        </div>
-
-        <!-- Pressure Sensor (PT) -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('pressure')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><circle cx="20" cy="14" r="11" fill="#0f172a" stroke="#38bdf8" stroke-width="2.2" /><text x="20" y="18" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="bold">PT</text></svg>
-            <span class="truncate mt-0.5">Press (PT)</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('pressure');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-sky-400 border border-slate-700 hover:border-sky-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Pressure Sensor Details">ⓘ</button>
-        </div>
-
-        <!-- Diff Pressure (DPT) -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('diffpressure')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><circle cx="20" cy="14" r="11" fill="#0f172a" stroke="#0ea5e9" stroke-width="2.2" /><text x="20" y="18" text-anchor="middle" fill="#0ea5e9" font-size="8" font-weight="bold">ΔP</text></svg>
-            <span class="truncate mt-0.5">Diff (DPT)</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('diffpressure');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-sky-400 border border-slate-700 hover:border-sky-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Diff Pressure Details">ⓘ</button>
-        </div>
-
-        <!-- Flow Meter (FT) -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('flowmeter')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><circle cx="20" cy="14" r="10" fill="#0f172a" stroke="#6366f1" stroke-width="2" /><text x="20" y="18" text-anchor="middle" fill="#6366f1" font-size="9" font-weight="bold">FT</text></svg>
-            <span class="truncate mt-0.5">Flow (FT)</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('flowmeter');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-indigo-400 border border-slate-700 hover:border-indigo-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Flow Meter Details">ⓘ</button>
-        </div>
-
-        <!-- Conductivity (CT) -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('conductivity')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><circle cx="20" cy="14" r="10" fill="#0f172a" stroke="#8b5cf6" stroke-width="2" /><text x="20" y="18" text-anchor="middle" fill="#8b5cf6" font-size="9" font-weight="bold">CT</text></svg>
-            <span class="truncate mt-0.5">Cond (CT)</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('conductivity');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-purple-400 border border-slate-700 hover:border-purple-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Conductivity Details">ⓘ</button>
-        </div>
-
-        <!-- Exp Tank -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('expansion')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><rect x="11" y="6" width="18" height="26" rx="7" fill="#0f172a" stroke="#f97316" stroke-width="2.2" /></svg>
-            <span class="truncate mt-0.5">Exp Tank</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('expansion');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-orange-400 border border-slate-700 hover:border-orange-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Exp Tank Details">ⓘ</button>
-        </div>
-
-        <!-- Strainer -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('strainer')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><path d="M 6 14 L 34 14 L 20 32 Z" fill="#0f172a" stroke="#eab308" stroke-width="2.2" /></svg>
-            <span class="truncate mt-0.5">Strainer</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('strainer');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-yellow-400 border border-slate-700 hover:border-yellow-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Strainer Details">ⓘ</button>
-        </div>
-
-        <!-- Fan Array -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('fan')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><rect x="6" y="6" width="28" height="28" rx="3" fill="#0f172a" stroke="#84cc16" stroke-width="2.2" /><circle cx="20" cy="20" r="4" fill="#84cc16" /></svg>
-            <span class="truncate mt-0.5">Fan Array</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('fan');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-lime-400 border border-slate-700 hover:border-lime-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Fan Array Details">ⓘ</button>
-        </div>
-
-        <!-- Air Vent -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('airvent')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><polygon points="12,24 28,24 20,10" fill="#0f172a" stroke="#f43f5e" stroke-width="2.2" /></svg>
-            <span class="truncate mt-0.5">Air Vent</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('airvent');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-rose-400 border border-slate-700 hover:border-rose-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Air Vent Details">ⓘ</button>
-        </div>
-
-        <!-- Hand Valve -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('handvalve')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><polygon points="10,13 30,27 30,13 10,27" fill="#0f172a" stroke="#94a3b8" stroke-width="1.8" /></svg>
-            <span class="truncate mt-0.5">Hand Vlv</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('handvalve');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-slate-400 border border-slate-700 hover:border-slate-300 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Hand Valve Details">ⓘ</button>
-        </div>
-
-        <!-- Reservoir Tank -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('watertank')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><rect x="7" y="9" width="26" height="22" rx="3" fill="#0f172a" stroke="#818cf8" stroke-width="2" /></svg>
-            <span class="truncate mt-0.5">Reservoir</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('watertank');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-indigo-400 border border-slate-700 hover:border-indigo-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Reservoir Details">ⓘ</button>
-        </div>
-
-        <!-- N2 Bottle -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('n2bottle')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><rect x="12" y="12" width="16" height="23" rx="4" fill="#0f172a" stroke="#ffde59" stroke-width="2" /></svg>
-            <span class="truncate mt-0.5">N2 Bottle</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('n2bottle');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-yellow-400 border border-slate-700 hover:border-yellow-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect N2 Bottle Details">ⓘ</button>
-        </div>
-
-        <!-- Filter -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('filter')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><rect x="10" y="11" width="20" height="18" rx="2" fill="#0f172a" stroke="#94a3b8" stroke-width="1.8" /></svg>
-            <span class="truncate mt-0.5">Filter</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('filter');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-slate-400 border border-slate-700 hover:border-slate-300 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Filter Details">ⓘ</button>
-        </div>
-
-        <!-- WQ Grid -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('wqgrid')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><rect x="5" y="10" width="30" height="20" rx="2" fill="#0f172a" stroke="#10b981" stroke-width="1.8" /></svg>
-            <span class="truncate mt-0.5">WQ Grid</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('wqgrid');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-emerald-400 border border-slate-700 hover:border-emerald-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect WQ Grid Details">ⓘ</button>
-        </div>
-
-        <!-- Vac Chamber -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('vacchamber')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><rect x="8" y="4" width="24" height="32" rx="3" fill="#0f172a" stroke="#818cf8" stroke-width="2" /></svg>
-            <span class="truncate mt-0.5">Vac Cyl</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('vacchamber');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-indigo-400 border border-slate-700 hover:border-indigo-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Vac Chamber Details">ⓘ</button>
-        </div>
-
-        <!-- Label -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('text')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><text x="20" y="26" text-anchor="middle" fill="#f8fafc" font-size="16" font-weight="bold">T</text></svg>
-            <span class="truncate mt-0.5">Label</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('text');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-slate-400 border border-slate-700 hover:border-slate-300 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Label Details">ⓘ</button>
-        </div>
-
-        <!-- Zone Box -->
-        <div class="relative group">
-          <button onclick="addSandboxItemAndClose('box')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
-            <svg width="22" height="22" viewBox="0 0 40 40"><rect x="5" y="7" width="30" height="26" rx="3" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 2" /></svg>
-            <span class="truncate mt-0.5">Zone Box</span>
-          </button>
-          <button onclick="event.stopPropagation(); showComponentDetails('box');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 text-sky-400 border border-slate-700 hover:border-sky-400 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect Zone Box Details">ⓘ</button>
-        </div>
-      </div>
+      <div id="tray-components" class="grid grid-cols-5 gap-1.5 sm:grid-cols-6"></div>
 
       <!-- 2. Pipes Tray -->
       <div id="tray-pipes" class="hidden flex flex-col gap-2.5">
@@ -941,6 +518,78 @@
     </div>
   </div>
 
+  
+  <!-- Fancy HUD Save Confirmation Modal -->
+  <div id="saveConfirmModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4 z-50 transition-opacity">
+    <div class="relative w-full max-w-lg bg-[#0b1329] border border-sky-500/40 rounded-2xl shadow-[0_0_35px_rgba(56,189,248,0.25)] overflow-hidden">
+      <!-- Cyberpunk HUD Corner Brackets -->
+      <div class="hud-modal-bracket top-left"></div>
+      <div class="hud-modal-bracket top-right"></div>
+      <div class="hud-modal-bracket bottom-left"></div>
+      <div class="hud-modal-bracket bottom-right"></div>
+
+      <!-- Glowing Top Accent Line -->
+      <div class="h-1 bg-gradient-to-r from-sky-500 via-blue-500 to-cyan-400"></div>
+
+      <!-- Modal Body -->
+      <div class="p-6">
+        <!-- Header Status -->
+        <div class="flex items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-9 h-9 rounded-xl bg-sky-500/20 border border-sky-500/40 flex items-center justify-center text-sky-400 text-lg shadow-sm">💾</span>
+            <div>
+              <h3 class="text-sm font-bold tracking-wider uppercase text-sky-400 font-mono">SAVE PROTOCOL // SCHEMATIC</h3>
+              <p class="text-[11px] text-slate-400 font-mono">UNSAVED CHANGES DETECTED</p>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 text-[10px] font-mono font-bold rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse">
+            ● DIRTY STATE
+          </span>
+        </div>
+
+        <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+          You have modified the active CDU schematic on the CAD canvas. Would you like to commit these changes to your HUD profile before returning to the dashboard?
+        </p>
+
+        <!-- High-tech Readout Box -->
+        <div class="bg-slate-900/90 border border-slate-800/80 rounded-xl p-3.5 mb-5 flex flex-col gap-2 font-mono text-xs">
+          <div class="flex justify-between items-center text-slate-400">
+            <span>TARGET_PROFILE:</span>
+            <span id="saveModalTargetProfile" class="text-sky-400 font-bold">100kW Dual Loop</span>
+          </div>
+          <div class="flex justify-between items-center text-slate-400">
+            <span>INVENTORY_COUNT:</span>
+            <span id="saveModalItemCount" class="text-slate-200">-- Components, -- Pipes</span>
+          </div>
+          <div class="flex justify-between items-center text-slate-400">
+            <span>STORAGE_TARGET:</span>
+            <span class="text-emerald-400">Local Profile Cache</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-2.5">
+          <!-- 1. Save & Return -->
+          <button id="saveAndExitBtn" onclick="confirmSaveAndExit()" class="flex-1 py-2.5 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-emerald-950/40 transition flex items-center justify-center gap-2 border border-emerald-400/40 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span>SAVE & RETURN</span>
+          </button>
+
+          <!-- 2. Discard & Return -->
+          <button onclick="discardAndExit()" class="py-2.5 px-3.5 bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 font-semibold text-xs rounded-xl transition flex items-center justify-center gap-1.5 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            <span>DISCARD</span>
+          </button>
+
+          <!-- 3. Keep Editing -->
+          <button onclick="closeSavePromptModal()" class="py-2.5 px-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 font-semibold text-xs rounded-xl transition cursor-pointer">
+            KEEP EDITING
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Notification Toast -->
   <div id="toast" class="fixed bottom-6 right-6 bg-blue-600 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-2xl transition transform translate-y-20 opacity-0 flex items-center gap-2 pointer-events-none z-50">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -1006,8 +655,8 @@
       }
     }
 
-    function addSandboxItemAndClose(type) {
-      if (window.addSandboxItem) window.addSandboxItem(type);
+    function addSandboxItemAndClose(type, variant = null) {
+      if (window.addSandboxItem) window.addSandboxItem(type, variant);
       closeMobileToolbox();
     }
 
@@ -1072,9 +721,114 @@
     }
 
     // Initialize component catalog grid dynamically on page load
+    
+    // Fancy HUD Save Confirmation Modal Handlers
+    function openSavePromptModal() {
+      const modal = document.getElementById('saveConfirmModal');
+      const profileLabel = document.getElementById('saveModalTargetProfile');
+      const countLabel = document.getElementById('saveModalItemCount');
+
+      const compCount = document.querySelectorAll('.comp-item').length;
+      const pipeCount = document.querySelectorAll('.pipe-item').length;
+
+      if (profileLabel) profileLabel.innerText = (window.activeSchematicLayout || '100kw').toUpperCase();
+      if (countLabel) countLabel.innerText = `${compCount} Components, ${pipeCount} Pipes`;
+
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeSavePromptModal() {
+      const modal = document.getElementById('saveConfirmModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function confirmSaveAndExit() {
+      const btn = document.getElementById('saveAndExitBtn');
+      if (btn) {
+        btn.innerHTML = '<span class="inline-block animate-spin mr-1">⚡</span> SAVING TO HUD...';
+        btn.disabled = true;
+      }
+      if (window.saveCurrentSchematicToStorage) {
+        window.saveCurrentSchematicToStorage(window.activeSchematicLayout);
+      }
+      setTimeout(() => {
+        window.location.href = '../index.html';
+      }, 400);
+    }
+
+    function discardAndExit() {
+      if (window.resetSchematicDirty) window.resetSchematicDirty();
+      window.location.href = '../index.html';
+    }
+
+    // Intercept Return to Dashboard link if there are unsaved modifications
+    const returnBtn = document.getElementById('returnToDashboardBtn');
+    if (returnBtn) {
+      returnBtn.addEventListener('click', (e) => {
+        if (window.isSchematicDirty && window.isSchematicDirty()) {
+          e.preventDefault();
+          openSavePromptModal();
+        }
+      });
+    }
+
+    // Warn on window reload / unload if dirty
+    window.addEventListener('beforeunload', (e) => {
+      if (window.isSchematicDirty && window.isSchematicDirty()) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
       if (window.renderCatalogGrid) {
         window.renderCatalogGrid('componentGrid');
+      }
+      if (window.renderDesktopPalette) {
+        window.renderDesktopPalette('desktopPaletteButtons');
+      }
+      if (window.renderMobilePalette) {
+        window.renderMobilePalette('tray-components');
+      }
+
+      // Check URL parameters for active schematic layout (e.g. ?schematic=100kw)
+      const urlParams = new URLSearchParams(window.location.search);
+      const targetSchematic = urlParams.get('schematic') || urlParams.get('layout') || urlParams.get('profile');
+
+      if (targetSchematic) {
+        // Specific schematic requested for editing (e.g., from EDIT button in HUD)
+        window.activeSchematicLayout = targetSchematic;
+        const badge = document.getElementById('activeSchematicHeaderBadge');
+        if (badge) badge.innerText = targetSchematic.toUpperCase();
+
+        // Attempt to load custom schematic from localStorage; fallback to standard preset
+        let customLoaded = false;
+        if (window.loadCustomSchematicFromStorage) {
+          customLoaded = window.loadCustomSchematicFromStorage(targetSchematic);
+        }
+        if (!customLoaded && window.loadPresetSchematic) {
+          const presetMap = {
+            '30kw': '30kw',
+            '75kw': '75kw',
+            '100kw': '100kw',
+            '300kw': '100kw',
+            '2.5mw': '100kw',
+            'vacuum_n2': 'vacuum',
+            'vacuum': 'vacuum'
+          };
+          window.loadPresetSchematic(presetMap[targetSchematic] || '100kw');
+        }
+      } else {
+        // CAD_Builder opened fresh: Start with a clean, empty canvas
+        window.activeSchematicLayout = 'custom_design';
+        const badge = document.getElementById('activeSchematicHeaderBadge');
+        if (badge) badge.innerText = 'EMPTY CANVAS';
+        if (window.clearSandbox) {
+          window.clearSandbox();
+        }
+        if (window.resetSchematicDirty) {
+          window.resetSchematicDirty();
+        }
       }
     });
   </script>

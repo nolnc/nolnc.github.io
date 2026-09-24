@@ -257,6 +257,7 @@ export default ${componentName};
     }
 
     closeImportModal();
+    if (window.resetSchematicDirty) window.resetSchematicDirty();
     if (window.refreshOutliner) window.refreshOutliner();
     if (window.showToast) {
       window.showToast(`Loaded ${presetName.toUpperCase()} Schematic Preset into CAD Canvas!`);
@@ -303,6 +304,7 @@ export default ${componentName};
       }
 
       closeImportModal();
+      if (window.markSchematicDirty) window.markSchematicDirty();
       if (window.refreshOutliner) window.refreshOutliner();
       if (window.showToast) window.showToast('Successfully imported SVG elements into CAD canvas!');
     } catch (err) {

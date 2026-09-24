@@ -327,6 +327,9 @@
   }
 
   function endInteraction() {
+    if (isDragging) {
+      markSchematicDirty();
+    }
     isDragging = false;
     dragTarget = null;
     activeHandle = null;
@@ -510,6 +513,7 @@
 
     // Update connected orthogonal pipes
     updateConnectedPipes(selectedElement.id);
+    markSchematicDirty();
   }
 
   // Independent Component Text Label Sizing
@@ -536,6 +540,7 @@
       const newFs = (baseSize * newTextScale).toFixed(1);
       t.setAttribute('font-size', newFs);
     });
+    markSchematicDirty();
   }
 
   // Edit Component or Static Text Content
@@ -554,6 +559,7 @@
       const newVal = prompt('Edit Text Label:', currentVal);
       if (newVal !== null && newVal.trim() !== '') {
         texts[0].textContent = newVal.trim();
+        markSchematicDirty();
         if (window.refreshOutliner) window.refreshOutliner();
       }
       return;
@@ -570,6 +576,7 @@
       }
     });
     if (updatedCount > 0 && window.refreshOutliner) {
+      markSchematicDirty();
       window.refreshOutliner();
     }
   }
@@ -588,6 +595,7 @@
 
     // Update connected orthogonal pipes
     updateConnectedPipes(selectedElement.id);
+    markSchematicDirty();
   }
 
   function inspectSelectedComponent() {
@@ -657,6 +665,7 @@
     selectedElement.remove();
     selectedElement = null;
     updateSelectionControls();
+    markSchematicDirty();
 
     // Clear connection references on pipes if component was deleted
     if (isComp) {
@@ -693,6 +702,7 @@
       </g>`;
 
     container.insertAdjacentHTML('beforeend', pipeMarkup);
+    markSchematicDirty();
     if (window.refreshOutliner) window.refreshOutliner();
   }
 
@@ -709,11 +719,15 @@
     if (window.CDU_COMPONENTS) {
       // Find matching definition
       let compDef = null;
-      for (const k in window.CDU_COMPONENTS) {
-        const item = window.CDU_COMPONENTS[k];
-        if (item.type === type && (!variant || item.variant === variant)) {
-          compDef = item;
-          break;
+      if (window.CDU_COMPONENTS[type]) {
+        compDef = window.CDU_COMPONENTS[type];
+      } else {
+        for (const k in window.CDU_COMPONENTS) {
+          const item = window.CDU_COMPONENTS[k];
+          if (item.type === type && (!variant || item.variant === variant)) {
+            compDef = item;
+            break;
+          }
         }
       }
 
@@ -733,6 +747,7 @@
     }
 
     container.insertAdjacentHTML('beforeend', markup);
+    markSchematicDirty();
     if (window.refreshOutliner) window.refreshOutliner();
   }
 
@@ -740,6 +755,7 @@
     document.getElementById('sandboxItemsContainer').innerHTML = '';
     document.getElementById('sandboxPipesContainer').innerHTML = '';
     deselectAll();
+    markSchematicDirty();
     if (window.refreshOutliner) window.refreshOutliner();
   }
 
@@ -841,6 +857,66 @@
     });
   }
 
+  // Schematic Dirty-State Tracking & Local Storage Persistence
+  let isSchematicDirty = false;
+
+  function markSchematicDirty() {
+    isSchematicDirty = true;
+    const badge = document.getElementById('unsavedChangesBadge');
+    if (badge) badge.classList.remove('hidden');
+  }
+
+  function resetSchematicDirty() {
+    isSchematicDirty = false;
+    const badge = document.getElementById('unsavedChangesBadge');
+    if (badge) badge.classList.add('hidden');
+  }
+
+  function isDirty() {
+    return isSchematicDirty;
+  }
+
+  function saveCurrentSchematicToStorage(schematicKey = null) {
+    const key = schematicKey || window.activeSchematicLayout || '100kw';
+    const pipesHtml = (document.getElementById('sandboxPipesContainer')?.innerHTML || '').trim();
+    const itemsHtml = (document.getElementById('sandboxItemsContainer')?.innerHTML || '').trim();
+    const dims = window.getCanvasDimensions ? window.getCanvasDimensions() : { width: 1200, height: 580 };
+
+    const payload = {
+      key: key,
+      updatedAt: new Date().toISOString(),
+      dims: dims,
+      pipesHtml: pipesHtml,
+      itemsHtml: itemsHtml
+    };
+
+    localStorage.setItem('cdu_schematic_custom_' + key, JSON.stringify(payload));
+    resetSchematicDirty();
+    if (window.showToast) {
+      window.showToast(`Saved ${key.toUpperCase()} Schematic to HUD profile!`);
+    }
+    return payload;
+  }
+
+  function loadCustomSchematicFromStorage(schematicKey) {
+    const raw = localStorage.getItem('cdu_schematic_custom_' + schematicKey);
+    if (!raw) return false;
+    try {
+      const data = JSON.parse(raw);
+      if (window.clearSandbox) window.clearSandbox();
+      const pipes = document.getElementById('sandboxPipesContainer');
+      const items = document.getElementById('sandboxItemsContainer');
+      if (pipes && data.pipesHtml) pipes.innerHTML = data.pipesHtml;
+      if (items && data.itemsHtml) items.innerHTML = data.itemsHtml;
+      if (window.refreshOutliner) window.refreshOutliner();
+      resetSchematicDirty();
+      return true;
+    } catch (e) {
+      console.error('Error loading custom schematic from storage:', e);
+      return false;
+    }
+  }
+
   // Exports to global window
   window.initCadEngine = initCadEngine;
   window.toggleSnapGrid = toggleSnapGrid;
@@ -862,6 +938,11 @@
   window.showToast = showToast;
   window.filterCategory = filterCategory;
   window.generateOrthogonalPath = generateOrthogonalPath;
+  window.markSchematicDirty = markSchematicDirty;
+  window.resetSchematicDirty = resetSchematicDirty;
+  window.isSchematicDirty = isDirty;
+  window.saveCurrentSchematicToStorage = saveCurrentSchematicToStorage;
+  window.loadCustomSchematicFromStorage = loadCustomSchematicFromStorage;
   window.getCanvasDimensions = () => ({ width: currentCanvasWidth, height: currentCanvasHeight });
   window.setCanvasDimensions = (w, h) => {
     currentCanvasWidth = w;

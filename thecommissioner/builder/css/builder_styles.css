@@ -75,6 +75,17 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(56, 189, 248, 0.25);
 }
+.palette-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.palette-icon-wrap svg {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
 .palette-btn .spin-on-hover {
   transform-origin: 20px 20px;
   transition: transform 0.2s ease;
@@ -439,6 +450,17 @@
   .mobile-toolbox-drawer #mobileOutlinerList {
     max-height: calc(50vh - 120px);
   }
+
+  /* Parts / Components view 5 columns wide in phone portrait mode */
+  .mobile-toolbox-drawer #tray-components:not(.hidden) {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .mobile-toolbox-drawer #tray-components.hidden {
+    display: none;
+  }
 }
 
 /* Mobile Landscape Mode: Left-Third Nested Drawer */
@@ -503,6 +525,17 @@
     flex: 1;
     overflow-y: auto;
   }
+
+  /* Parts / Components view 5 columns wide in phone landscape mode */
+  .mobile-toolbox-drawer #tray-components:not(.hidden) {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .mobile-toolbox-drawer #tray-components.hidden {
+    display: none;
+  }
 }
 
 /* Component Info Bottom Sheet / Modal Styling */
@@ -534,4 +567,36 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+}
+
+/* Cyberpunk / Sci-Fi HUD Save Confirmation Modal */
+.hud-modal-bracket {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+.hud-modal-bracket.top-left {
+  top: 8px;
+  left: 8px;
+  border-top: 2px solid #38bdf8;
+  border-left: 2px solid #38bdf8;
+}
+.hud-modal-bracket.top-right {
+  top: 8px;
+  right: 8px;
+  border-top: 2px solid #38bdf8;
+  border-right: 2px solid #38bdf8;
+}
+.hud-modal-bracket.bottom-left {
+  bottom: 8px;
+  left: 8px;
+  border-bottom: 2px solid #38bdf8;
+  border-left: 2px solid #38bdf8;
+}
+.hud-modal-bracket.bottom-right {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 2px solid #38bdf8;
+  border-right: 2px solid #38bdf8;
 }

@@ -319,8 +319,18 @@
         return `<g id="${id}" transform="translate(${x}, ${y}) rotate(${rot}) scale(${scale})" class="draggable-item comp-item" data-type="comp" data-x="${x}" data-y="${y}" data-rot="${rot}" data-scale="${scale}">
           <circle cx="0" cy="0" r="16" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5"/>
           <g class="${anim ? 'spin-target spin-active' : 'spin-target'}" style="transform-origin: 0px 0px;">
-            <path d="M -10 -2 L 10 2 M -2 -10 L 2 10 M -8 6 L 8 -6 M -6 -8 L 6 8" stroke="#3b82f6" stroke-width="1.5"/>
-            <circle cx="0" cy="0" r="4" fill="#3b82f6"/>
+            <g fill="#3b82f6" opacity="0.85">
+              <path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" />
+              <path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(45)" />
+              <path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(90)" />
+              <path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(135)" />
+              <path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(180)" />
+              <path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(225)" />
+              <path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(270)" />
+              <path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(315)" />
+            </g>
+            <circle cx="0" cy="0" r="4.5" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+            <circle cx="0" cy="0" r="2" fill="#3b82f6"/>
           </g>
           <text x="0" y="28" text-anchor="middle" fill="#94a3b8" font-size="8" font-weight="bold">FAN</text>
         </g>`;
@@ -328,12 +338,22 @@
       previewSvg: `<svg width="90" height="70" viewBox="0 0 120 100">
         <circle cx="60" cy="45" r="22" fill="#0f172a" stroke="#3b82f6" stroke-width="2" />
         <g class="spin-target spin-active" style="transform-origin: 60px 45px;">
-          <path d="M 45 42 L 75 48 M 57 30 L 63 60 M 48 54 L 72 36 M 51 33 L 69 57" stroke="#3b82f6" stroke-width="2" />
-          <circle cx="60" cy="45" r="5" fill="#3b82f6" />
+          <g transform="translate(60, 45)" fill="#3b82f6" opacity="0.9">
+            <path d="M 0,-5 C 4,-12 10,-16 4,-19 C 0,-18 -1,-11 0,-5 Z" />
+            <path d="M 0,-5 C 4,-12 10,-16 4,-19 C 0,-18 -1,-11 0,-5 Z" transform="rotate(45)" />
+            <path d="M 0,-5 C 4,-12 10,-16 4,-19 C 0,-18 -1,-11 0,-5 Z" transform="rotate(90)" />
+            <path d="M 0,-5 C 4,-12 10,-16 4,-19 C 0,-18 -1,-11 0,-5 Z" transform="rotate(135)" />
+            <path d="M 0,-5 C 4,-12 10,-16 4,-19 C 0,-18 -1,-11 0,-5 Z" transform="rotate(180)" />
+            <path d="M 0,-5 C 4,-12 10,-16 4,-19 C 0,-18 -1,-11 0,-5 Z" transform="rotate(225)" />
+            <path d="M 0,-5 C 4,-12 10,-16 4,-19 C 0,-18 -1,-11 0,-5 Z" transform="rotate(270)" />
+            <path d="M 0,-5 C 4,-12 10,-16 4,-19 C 0,-18 -1,-11 0,-5 Z" transform="rotate(315)" />
+          </g>
+          <circle cx="60" cy="45" r="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.8" />
+          <circle cx="60" cy="45" r="2.5" fill="#3b82f6" />
         </g>
         <text x="60" y="86" text-anchor="middle" fill="#94a3b8" font-size="9" font-weight="bold">FAN</text>
       </svg>`,
-      jsxSnippet: `<g transform="translate(X, Y)"><circle r="16" fill="#0f172a" stroke="#3b82f6" strokeWidth="1.5" /><g className="fan-spin" style={{ transformOrigin: "0 0" }}><path d="M -10 -2 L 10 2 M -2 -10 L 2 10 M -8 6 L 8 -6 M -6 -8 L 6 8" stroke="#3b82f6" strokeWidth="1.5" /><circle r="4" fill="#3b82f6" /></g></g>`
+      jsxSnippet: `<g transform="translate(X, Y)"><circle r="16" fill="#0f172a" stroke="#3b82f6" strokeWidth="1.5" /><g className="fan-spin" style={{ transformOrigin: "0 0" }}><g fill="#3b82f6" opacity="0.85"><path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" /><path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(45)" /><path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(90)" /><path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(135)" /><path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(180)" /><path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(225)" /><path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(270)" /><path d="M 0,-4 C 3,-9 7,-12 3,-14 C 0,-13 -1,-8 0,-4 Z" transform="rotate(315)" /></g><circle r="4.5" fill="#1e293b" stroke="#3b82f6" strokeWidth="1.5" /><circle r="2" fill="#3b82f6" /></g></g>`
     },
 
     // 11. Radiator Fan Matrix (Dual Array)
@@ -968,6 +988,25 @@
     }
   };
 
+  // Helper function to format an SVG string for palette buttons by setting root width and height
+  function formatIconSvg(svgStr, width, height) {
+    if (!svgStr) return '';
+    return svgStr.replace(/<svg\b([^>]*)>/i, function(match, attrs) {
+      var updated = attrs;
+      if (/\bwidth="[^"]*"/i.test(updated)) {
+        updated = updated.replace(/\bwidth="[^"]*"/i, 'width="' + width + '"');
+      } else {
+        updated += ' width="' + width + '"';
+      }
+      if (/\bheight="[^"]*"/i.test(updated)) {
+        updated = updated.replace(/\bheight="[^"]*"/i, 'height="' + height + '"');
+      } else {
+        updated += ' height="' + height + '"';
+      }
+      return '<svg ' + updated + '>';
+    });
+  }
+
   // Helper function to dynamically render all catalog cards
   function renderCatalogGrid(containerId) {
     const container = document.getElementById(containerId);
@@ -1002,8 +1041,62 @@
     container.innerHTML = html;
   }
 
+  // Helper function to dynamically render desktop component palette buttons
+  function renderDesktopPalette(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    let html = '';
+    for (const key in CDU_COMPONENTS) {
+      const comp = CDU_COMPONENTS[key];
+      const iconSvg = formatIconSvg(comp.previewSvg, 32, 32);
+      html += `
+        <button onclick="addSandboxItem('${comp.type}', '${comp.variant}')" class="palette-btn" aria-label="${comp.name}">
+          <div class="palette-icon-wrap w-8 h-8 flex items-center justify-center pointer-events-none">
+            ${iconSvg}
+          </div>
+          <span class="palette-tooltip">${comp.name}</span>
+        </button>`;
+    }
+    container.innerHTML = html;
+  }
+
+  // Helper function to dynamically render mobile toolbox parts drawer buttons
+  function renderMobilePalette(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const catColorMap = {
+      pumps: 'text-blue-400 hover:border-blue-400',
+      valves: 'text-emerald-400 hover:border-emerald-400',
+      vessels: 'text-amber-400 hover:border-amber-400',
+      sensors: 'text-purple-400 hover:border-purple-400',
+      labels: 'text-sky-400 hover:border-sky-400'
+    };
+
+    let html = '';
+    for (const key in CDU_COMPONENTS) {
+      const comp = CDU_COMPONENTS[key];
+      const colorCls = catColorMap[comp.category] || 'text-blue-400 hover:border-blue-400';
+      const iconSvg = formatIconSvg(comp.previewSvg, 22, 22);
+      html += `
+        <div class="relative group">
+          <button onclick="addSandboxItemAndClose('${comp.type}', '${comp.variant}')" class="palette-btn w-full h-12 flex flex-col items-center justify-center p-1 text-[10px] text-slate-300">
+            <div class="palette-icon-wrap w-5 h-5 flex items-center justify-center pointer-events-none">
+              ${iconSvg}
+            </div>
+            <span class="truncate mt-0.5 w-full text-center">${comp.name}</span>
+          </button>
+          <button onclick="event.stopPropagation(); showComponentDetails('${key}');" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-slate-800 ${colorCls} border border-slate-700 rounded-full flex items-center justify-center text-[10px] font-bold shadow-md z-10" title="Inspect ${comp.name} Details">ⓘ</button>
+        </div>`;
+    }
+    container.innerHTML = html;
+  }
+
   // Export to global window object
   window.CDU_COMPONENTS = CDU_COMPONENTS;
   window.renderCatalogGrid = renderCatalogGrid;
+  window.renderDesktopPalette = renderDesktopPalette;
+  window.renderMobilePalette = renderMobilePalette;
 
 })(window);
